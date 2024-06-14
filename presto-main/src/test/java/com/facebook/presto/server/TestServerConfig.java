@@ -48,7 +48,9 @@ public class TestServerConfig
                 .setPoolType(DEFAULT)
                 .setClusterStatsExpirationDuration(new Duration(0, MILLISECONDS))
                 .setNestedDataSerializationEnabled(true)
-                .setClusterResourceGroupStateInfoExpirationDuration(new Duration(0, MILLISECONDS)));
+                .setClusterResourceGroupStateInfoExpirationDuration(new Duration(0, MILLISECONDS))
+                .setResourceGroupStateInfoSchedulerEnabled(false)
+                .setResourceGroupIdsOnScheduler(null));
     }
 
     @Test
@@ -70,6 +72,8 @@ public class TestServerConfig
                 .put("cluster-stats-expiration-duration", "10s")
                 .put("nested-data-serialization-enabled", "false")
                 .put("cluster-resource-group-state-info-expiration-duration", "10s")
+                .put("resource-group-state-info-scheduler-enabled", "true")
+                .put("resource-group-ids-on-scheduler", "a,b,c,d")
                 .build();
 
         ServerConfig expected = new ServerConfig()
@@ -87,7 +91,9 @@ public class TestServerConfig
                 .setPoolType(LEAF)
                 .setClusterStatsExpirationDuration(new Duration(10, SECONDS))
                 .setNestedDataSerializationEnabled(false)
-                .setClusterResourceGroupStateInfoExpirationDuration(new Duration(10, SECONDS));
+                .setClusterResourceGroupStateInfoExpirationDuration(new Duration(10, SECONDS))
+                .setResourceGroupStateInfoSchedulerEnabled(true)
+                .setResourceGroupIdsOnScheduler("a,b,c,d");
 
         assertFullMapping(properties, expected);
     }

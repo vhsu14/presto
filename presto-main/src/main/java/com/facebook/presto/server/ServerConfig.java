@@ -14,10 +14,16 @@
 package com.facebook.presto.server;
 
 import com.facebook.airlift.configuration.Config;
+import com.facebook.airlift.configuration.ConfigDescription;
 import com.facebook.presto.spi.NodePoolType;
+import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableSet;
 import io.airlift.units.Duration;
 
 import javax.validation.constraints.NotNull;
+
+import java.util.Optional;
+import java.util.Set;
 
 import static com.facebook.presto.spi.NodePoolType.DEFAULT;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
@@ -41,6 +47,8 @@ public class ServerConfig
     private Duration clusterStatsExpirationDuration = new Duration(0, MILLISECONDS);
     private boolean nestedDataSerializationEnabled = true;
     private Duration clusterResourceGroupStateInfoExpirationDuration = new Duration(0, MILLISECONDS);
+    private boolean resourceGroupStateInfoSchedulerEnabled;
+    private Optional<Set<String>> resourceGroupsIdsOnScheduler = Optional.empty();
 
     public boolean isResourceManager()
     {
@@ -225,6 +233,32 @@ public class ServerConfig
     public ServerConfig setClusterResourceGroupStateInfoExpirationDuration(Duration clusterResourceGroupStateInfoExpirationDuration)
     {
         this.clusterResourceGroupStateInfoExpirationDuration = clusterResourceGroupStateInfoExpirationDuration;
+        return this;
+    }
+
+    public boolean isResourceGroupStateInfoSchedulerEnabled()
+    {
+        return resourceGroupStateInfoSchedulerEnabled;
+    }
+
+    @Config("resource-group-state-info-scheduler-enabled")
+    public ServerConfig setResourceGroupStateInfoSchedulerEnabled(boolean resourceGroupStateInfoSchedulerEnabled)
+    {
+        this.resourceGroupStateInfoSchedulerEnabled = resourceGroupStateInfoSchedulerEnabled;
+        return this;
+    }
+
+    public Optional<Set<String>> getResourceGroupIdsOnScheduler()
+    {
+        return resourceGroupsIdsOnScheduler;
+    }
+
+    @Config("resource-group-ids-on-scheduler")
+    public ServerConfig setResourceGroupIdsOnScheduler(String resourceGroupsIdsOnScheduler)
+    {
+        this.resourceGroupsIdsOnScheduler = resourceGroupsIdsOnScheduler == null ?
+                Optional.empty() :
+                Optional.of(ImmutableSet.copyOf(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(resourceGroupsIdsOnScheduler)));
         return this;
     }
 }

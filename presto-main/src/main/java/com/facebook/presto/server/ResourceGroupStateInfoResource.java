@@ -53,6 +53,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.facebook.presto.server.ResourceGroupStateInfoUtils.proxyResourceGroupInfoResponse;
 import static com.facebook.presto.server.security.RoleType.ADMIN;
 import static com.google.common.base.MoreObjects.toStringHelper;
 import static com.google.common.base.Preconditions.checkState;
@@ -161,7 +162,7 @@ public class ResourceGroupStateInfoResource
             @Suspended AsyncResponse asyncResponse)
     {
         if (resourceManagerEnabled && !includeLocalInfoOnly) {
-            proxyResourceGroupInfoResponse(servletRequest, asyncResponse, xForwardedProto, uriInfo);
+            proxyResourceGroupInfoResponse(proxyHelper, internalNodeManager, servletRequest, asyncResponse, xForwardedProto, uriInfo);
             return;
         }
         try {
@@ -216,26 +217,26 @@ public class ResourceGroupStateInfoResource
     }
 
     //TODO move this to a common place and reuse in all resource
-    private void proxyResourceGroupInfoResponse(HttpServletRequest servletRequest, AsyncResponse asyncResponse, String xForwardedProto, UriInfo uriInfo)
-    {
-        try {
-            checkState(proxyHelper.isPresent());
-            Iterator<InternalNode> resourceManagers = internalNodeManager.getResourceManagers().iterator();
-            if (!resourceManagers.hasNext()) {
-                asyncResponse.resume(Response.status(SERVICE_UNAVAILABLE).build());
-                return;
-            }
-            InternalNode resourceManagerNode = resourceManagers.next();
-
-            URI uri = uriInfo.getRequestUriBuilder()
-                    .scheme(resourceManagerNode.getInternalUri().getScheme())
-                    .host(resourceManagerNode.getHostAndPort().toInetAddress().getHostName())
-                    .port(resourceManagerNode.getInternalUri().getPort())
-                    .build();
-            proxyHelper.get().performRequest(servletRequest, asyncResponse, uri);
-        }
-        catch (Exception e) {
-            asyncResponse.resume(e);
-        }
-    }
+//    private void proxyResourceGroupInfoResponse(HttpServletRequest servletRequest, AsyncResponse asyncResponse, String xForwardedProto, UriInfo uriInfo)
+//    {
+//        try {
+//            checkState(proxyHelper.isPresent());
+//            Iterator<InternalNode> resourceManagers = internalNodeManager.getResourceManagers().iterator();
+//            if (!resourceManagers.hasNext()) {
+//                asyncResponse.resume(Response.status(SERVICE_UNAVAILABLE).build());
+//                return;
+//            }
+//            InternalNode resourceManagerNode = resourceManagers.next();
+//
+//            URI uri = uriInfo.getRequestUriBuilder()
+//                    .scheme(resourceManagerNode.getInternalUri().getScheme())
+//                    .host(resourceManagerNode.getHostAndPort().toInetAddress().getHostName())
+//                    .port(resourceManagerNode.getInternalUri().getPort())
+//                    .build();
+//            proxyHelper.get().performRequest(servletRequest, asyncResponse, uri);
+//        }
+//        catch (Exception e) {
+//            asyncResponse.resume(e);
+//        }
+//    }
 }
