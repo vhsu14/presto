@@ -53,6 +53,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.facebook.presto.server.ResourceGroupStateInfoUtils.getResourceGroupInfo;
 import static com.facebook.presto.server.ResourceGroupStateInfoUtils.proxyResourceGroupInfoResponse;
 import static com.facebook.presto.server.security.RoleType.ADMIN;
 import static com.google.common.base.MoreObjects.toStringHelper;
@@ -162,7 +163,7 @@ public class ResourceGroupStateInfoResource
             @Suspended AsyncResponse asyncResponse)
     {
         if (resourceManagerEnabled && !includeLocalInfoOnly) {
-            proxyResourceGroupInfoResponse(proxyHelper, internalNodeManager, servletRequest, asyncResponse, xForwardedProto, uriInfo);
+            proxyResourceGroupInfoResponse(proxyHelper, internalNodeManager, servletRequest, asyncResponse, uriInfo);
             return;
         }
         try {
@@ -176,8 +177,8 @@ public class ResourceGroupStateInfoResource
                 ResourceGroupStateInfoKey resourceGroupStateInfoKey = new ResourceGroupStateInfoKey(resourceGroupId, includeQueryInfo, summarizeSubgroups, includeStaticSubgroupsOnly);
 
                 Supplier<ResourceGroupInfo> resourceGroupInfoSupplier = resourceGroupStateInfoKeySupplierMap.getOrDefault(resourceGroupStateInfoKey, expirationDuration.getValue() > 0 ?
-                                Suppliers.memoizeWithExpiration(() -> getResourceGroupInfo(resourceGroupId, includeQueryInfo, summarizeSubgroups, includeStaticSubgroupsOnly), expirationDuration.toMillis(), MILLISECONDS) :
-                                Suppliers.ofInstance(getResourceGroupInfo(resourceGroupId, includeQueryInfo, summarizeSubgroups, includeStaticSubgroupsOnly)));
+                                Suppliers.memoizeWithExpiration(() -> getResourceGroupInfo(resourceGroupManager, resourceGroupId, includeQueryInfo, summarizeSubgroups, includeStaticSubgroupsOnly), expirationDuration.toMillis(), MILLISECONDS) :
+                                Suppliers.ofInstance(getResourceGroupInfo(resourceGroupManager, resourceGroupId, includeQueryInfo, summarizeSubgroups, includeStaticSubgroupsOnly)));
 
                 resourceGroupStateInfoKeySupplierMap.putIfAbsent(resourceGroupStateInfoKey, resourceGroupInfoSupplier);
 
@@ -189,14 +190,14 @@ public class ResourceGroupStateInfoResource
         }
     }
 
-    private ResourceGroupInfo getResourceGroupInfo(ResourceGroupId resourceGroupId, boolean includeQueryInfo, boolean summarizeSubgroups, boolean includeStaticSubgroupsOnly)
-    {
-        return resourceGroupManager.getResourceGroupInfo(
-                resourceGroupId,
-                includeQueryInfo,
-                summarizeSubgroups,
-                includeStaticSubgroupsOnly);
-    }
+//    private ResourceGroupInfo getResourceGroupInfo(ResourceGroupId resourceGroupId, boolean includeQueryInfo, boolean summarizeSubgroups, boolean includeStaticSubgroupsOnly)
+//    {
+//        return resourceGroupManager.getResourceGroupInfo(
+//                resourceGroupId,
+//                includeQueryInfo,
+//                summarizeSubgroups,
+//                includeStaticSubgroupsOnly);
+//    }
 
     private ResourceGroupId getResourceGroupId(String resourceGroupIdString)
     {
