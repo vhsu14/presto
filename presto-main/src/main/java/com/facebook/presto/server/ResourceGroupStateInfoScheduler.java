@@ -26,6 +26,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import static com.facebook.presto.server.ResourceGroupStateInfoUtils.directResourceGroupInfoResponse;
 import static com.facebook.presto.server.ResourceGroupStateInfoUtils.getResourceGroupInfo;
 import static com.facebook.presto.server.ResourceGroupStateInfoUtils.proxyResourceGroupInfoResponse;
 import static com.google.common.base.Preconditions.checkState;
@@ -78,7 +79,7 @@ public class ResourceGroupStateInfoScheduler
                 if (resourceManagerEnabled)
                 {
                     // Note this could also have exception
-                    proxyResourceGroupInfoResponse(proxyHelper, internalNodeManager);
+                    directResourceGroupInfoResponse(proxyHelper, internalNodeManager);
                 }
 
                 try {
