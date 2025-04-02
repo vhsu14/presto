@@ -1,5 +1,5 @@
 namespace java com.facebook.presto.common.experimental
-namespace cpp protocol
+namespace cpp facebook.presto.protocol
 
 struct ThriftSourceLocation {
   1: i32 line;
@@ -59,7 +59,7 @@ struct ThriftHostAddress {
 struct ThriftExecutionFailureInfo {
   1: string type;
   2: string message;
-  3: ThriftExecutionFailureInfo cause;
+  3: ThriftExecutionFailureInfo& cause;
   4: list<ThriftExecutionFailureInfo> suppressed;
   5: list<string> stack;
   6: ThriftErrorLocation errorLocation;
