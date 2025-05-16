@@ -18,21 +18,162 @@
 // This file is generated DO NOT EDIT @generated
 
 #include "presto_cpp/main/thrift/gen-cpp2/PrestoThrift.h"
-#include "presto_cpp/presto_protocol/core/presto_protocol_core.h"
+#include "presto_cpp/presto_protocol/presto_protocol.h"
 
 namespace facebook::presto {
 
 void toThrift(protocol::TaskState& proto, thrift::TaskState& thrift);
 void toThrift(protocol::ErrorType& proto, thrift::ErrorType& thrift);
+void toThrift(protocol::ErrorCause& proto, thrift::ErrorCause& thrift);
+void toThrift(protocol::BufferState& proto, thrift::BufferState& thrift);
+void toThrift(protocol::BlockedReason& proto, thrift::BlockedReason& thrift);
+void toThrift(protocol::RuntimeUnit& proto, thrift::RuntimeUnit& thrift);
+void toThrift(protocol::JoinType& proto, thrift::JoinType& thrift);
+void toThrift(protocol::Type& proto, thrift::Type& thrift);
+void toThrift(protocol::Determinism& proto, thrift::Determinism& thrift);
+void toThrift(protocol::NullCallClause& proto, thrift::NullCallClause& thrift);
+void toThrift(protocol::FunctionKind& proto, thrift::FunctionKind& thrift);
+void toThrift(protocol::BufferType& proto, thrift::BufferType& thrift);
+void toThrift(
+    const protocol::SplitWrapper& proto,
+    thrift::SplitWrapper& thrift);
+void toThrift(
+    const protocol::TableWriteInfoWrapper& proto,
+    thrift::TableWriteInfoWrapper& thrift);
+void toThrift(
+    const protocol::MetadataUpdatesWrapper& proto,
+    thrift::MetadataUpdatesWrapper& thrift);
 void toThrift(const protocol::Lifespan& proto, thrift::Lifespan& thrift);
 void toThrift(
     const protocol::ErrorLocation& proto,
     thrift::ErrorLocation& thrift);
 void toThrift(const protocol::HostAddress& proto, thrift::HostAddress& thrift);
+void toThrift(const protocol::StageId& proto, thrift::StageId& thrift);
+void toThrift(
+    const protocol::OutputBufferId& proto,
+    thrift::OutputBufferId& thrift);
+void toThrift(
+    const protocol::PageBufferInfo& proto,
+    thrift::PageBufferInfo& thrift);
+void toThrift(const protocol::PlanNodeId& proto, thrift::PlanNodeId& thrift);
+void toThrift(
+    const protocol::DistributionSnapshot& proto,
+    thrift::DistributionSnapshot& thrift);
+void toThrift(
+    const protocol::RuntimeStats& proto,
+    thrift::RuntimeStats& thrift);
+void toThrift(
+    const protocol::ExchangeClientStatus& proto,
+    thrift::ExchangeClientStatus& thrift);
+void toThrift(
+    const protocol::PageBufferClientStatus& proto,
+    thrift::PageBufferClientStatus& thrift);
+void toThrift(
+    const protocol::LocalExchangeBufferInfo& proto,
+    thrift::LocalExchangeBufferInfo& thrift);
+void toThrift(
+    const protocol::TableFinishInfo& proto,
+    thrift::TableFinishInfo& thrift);
+void toThrift(
+    const protocol::SplitOperatorInfo& proto,
+    thrift::SplitOperatorInfo& thrift);
+void toThrift(
+    const protocol::HashCollisionsInfo& proto,
+    thrift::HashCollisionsInfo& thrift);
+void toThrift(
+    const protocol::PartitionedOutputInfo& proto,
+    thrift::PartitionedOutputInfo& thrift);
+void toThrift(const protocol::WindowInfo& proto, thrift::WindowInfo& thrift);
+void toThrift(
+    const protocol::DriverWindowInfo& proto,
+    thrift::DriverWindowInfo& thrift);
+void toThrift(
+    const protocol::TableWriterInfo& proto,
+    thrift::TableWriterInfo& thrift);
+void toThrift(
+    const protocol::TableWriterMergeInfo& proto,
+    thrift::TableWriterMergeInfo& thrift);
+void toThrift(
+    const protocol::DynamicFilterStats& proto,
+    thrift::DynamicFilterStats& thrift);
+void toThrift(const protocol::DriverStats& proto, thrift::DriverStats& thrift);
+void toThrift(
+    const protocol::TransactionId& proto,
+    thrift::TransactionId& thrift);
+void toThrift(const protocol::TimeZoneKey& proto, thrift::TimeZoneKey& thrift);
+void toThrift(
+    const protocol::ResourceEstimates& proto,
+    thrift::ResourceEstimates& thrift);
+void toThrift(const protocol::ConnectorId& proto, thrift::ConnectorId& thrift);
+void toThrift(
+    const protocol::SqlFunctionId& proto,
+    thrift::SqlFunctionId& thrift);
+void toThrift(
+    const protocol::TypeSignature& proto,
+    thrift::TypeSignature& thrift);
+void toThrift(const protocol::Language& proto, thrift::Language& thrift);
+void toThrift(
+    const protocol::QualifiedObjectName& proto,
+    thrift::QualifiedObjectName& thrift);
+void toThrift(
+    const protocol::TypeVariableConstraint& proto,
+    thrift::TypeVariableConstraint& thrift);
+void toThrift(
+    const protocol::LongVariableConstraint& proto,
+    thrift::LongVariableConstraint& thrift);
+void toThrift(const protocol::TaskSource& proto, thrift::TaskSource& thrift);
+void toThrift(
+    const protocol::ScheduledSplit& proto,
+    thrift::ScheduledSplit& thrift);
 void toThrift(const protocol::TaskStatus& proto, thrift::TaskStatus& thrift);
 void toThrift(const protocol::ErrorCode& proto, thrift::ErrorCode& thrift);
 void toThrift(
+    const protocol::StageExecutionId& proto,
+    thrift::StageExecutionId& thrift);
+void toThrift(
+    const protocol::OutputBufferInfo& proto,
+    thrift::OutputBufferInfo& thrift);
+void toThrift(const protocol::BufferInfo& proto, thrift::BufferInfo& thrift);
+void toThrift(const protocol::TaskStats& proto, thrift::TaskStats& thrift);
+void toThrift(
+    const protocol::PipelineStats& proto,
+    thrift::PipelineStats& thrift);
+void toThrift(
+    const protocol::RuntimeMetric& proto,
+    thrift::RuntimeMetric& thrift);
+void toThrift(
+    const protocol::JoinOperatorInfo& proto,
+    thrift::JoinOperatorInfo& thrift);
+void toThrift(
+    const protocol::SessionRepresentation& proto,
+    thrift::SessionRepresentation& thrift);
+void toThrift(
+    const protocol::SelectedRole& proto,
+    thrift::SelectedRole& thrift);
+void toThrift(const protocol::Parameter& proto, thrift::Parameter& thrift);
+void toThrift(
+    const protocol::RoutineCharacteristics& proto,
+    thrift::RoutineCharacteristics& thrift);
+void toThrift(const protocol::Signature& proto, thrift::Signature& thrift);
+void toThrift(
+    const protocol::OutputBuffers& proto,
+    thrift::OutputBuffers& thrift);
+void toThrift(
+    const protocol::TaskUpdateRequest& proto,
+    thrift::TaskUpdateRequest& thrift);
+void toThrift(
     const protocol::ExecutionFailureInfo& proto,
     thrift::ExecutionFailureInfo& thrift);
+void toThrift(const protocol::TaskId& proto, thrift::TaskId& thrift);
+void toThrift(
+    const protocol::OperatorInfoUnion& proto,
+    thrift::OperatorInfoUnion& thrift);
+void toThrift(
+    const protocol::SqlInvokedFunction& proto,
+    thrift::SqlInvokedFunction& thrift);
+void toThrift(const protocol::TaskInfo& proto, thrift::TaskInfo& thrift);
+void toThrift(
+    const protocol::OperatorStats& proto,
+    thrift::OperatorStats& thrift);
 
 } // namespace facebook::presto

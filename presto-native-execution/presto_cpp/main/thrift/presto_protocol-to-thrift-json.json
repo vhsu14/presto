@@ -58,6 +58,233 @@
     ]
   },
   {
+    "enum": true,
+    "class_name": "ErrorCause",
+    "elements": [
+      {
+        "name": "UNKNOWN",
+        "tag": 0
+      },
+      {
+        "name": "LOW_PARTITION_COUNT",
+        "tag": 1
+      },
+      {
+        "name": "EXCEEDS_BROADCAST_MEMORY_LIMIT",
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "BufferState",
+    "elements": [
+      {
+        "name": "OPEN",
+        "tag": 0
+      },
+      {
+        "name": "NO_MORE_BUFFERS",
+        "tag": 1
+      },
+      {
+        "name": "NO_MORE_PAGES",
+        "tag": 2
+      },
+      {
+        "name": "FLUSHING",
+        "tag": 3
+      },
+      {
+        "name": "FINISHED",
+        "tag": 4
+      },
+      {
+        "name": "FAILED",
+        "tag": 5
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "BlockedReason",
+    "elements": [
+      {
+        "name": "WAITING_FOR_MEMORY",
+        "tag": 0
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "RuntimeUnit",
+    "elements": [
+      {
+        "name": "NONE",
+        "tag": 0
+      },
+      {
+        "name": "NANO",
+        "tag": 1
+      },
+      {
+        "name": "BYTE",
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "JoinType",
+    "elements": [
+      {
+        "name": "INNER",
+        "tag": 0
+      },
+      {
+        "name": "PROBE_OUTER",
+        "tag": 1
+      },
+      {
+        "name": "LOOKUP_OUTER",
+        "tag": 2
+      },
+      {
+        "name": "FULL_OUTER",
+        "tag": 3
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "Type",
+    "elements": [
+      {
+        "name": "ROLE",
+        "tag": 0
+      },
+      {
+        "name": "ALL",
+        "tag": 1
+      },
+      {
+        "name": "NONE",
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "Determinism",
+    "elements": [
+      {
+        "name": "DETERMINISTIC",
+        "tag": 0
+      },
+      {
+        "name": "NOT_DETERMINISTIC",
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "NullCallClause",
+    "elements": [
+      {
+        "name": "RETURNS_NULL_ON_NULL_INPUT",
+        "tag": 0
+      },
+      {
+        "name": "CALLED_ON_NULL_INPUT",
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "FunctionKind",
+    "elements": [
+      {
+        "name": "SCALAR",
+        "tag": 0
+      },
+      {
+        "name": "AGGREGATE",
+        "tag": 1
+      },
+      {
+        "name": "WINDOW",
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "enum": true,
+    "class_name": "BufferType",
+    "elements": [
+      {
+        "name": "PARTITIONED",
+        "tag": 0
+      },
+      {
+        "name": "BROADCAST",
+        "tag": 1
+      },
+      {
+        "name": "ARBITRARY",
+        "tag": 2
+      },
+      {
+        "name": "DISCARDING",
+        "tag": 3
+      },
+      {
+        "name": "SPOOLING",
+        "tag": 4
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "SplitWrapper",
+    "fields": [
+      {
+        "field_name": "split",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TableWriteInfoWrapper",
+    "fields": [
+      {
+        "field_name": "tableWriteInfo",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "MetadataUpdatesWrapper",
+    "fields": [
+      {
+        "field_name": "metadataUpdates",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
     "struct": true,
     "class_name": "Lifespan",
     "fields": [
@@ -129,6 +356,1181 @@
   },
   {
     "struct": true,
+    "class_name": "StageId",
+    "fields": [
+      {
+        "field_name": "queryId",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "id",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "OutputBufferId",
+    "fields": [
+      {
+        "field_name": "id",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "PageBufferInfo",
+    "fields": [
+      {
+        "field_name": "partition",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "partition",
+        "convert": true
+      },
+      {
+        "field_name": "bufferedPages",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "bufferedPages",
+        "convert": true
+      },
+      {
+        "field_name": "bufferedBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "bufferedBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rowsAdded",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "rowsAdded",
+        "convert": true
+      },
+      {
+        "field_name": "pagesAdded",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "pagesAdded",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "PlanNodeId",
+    "fields": [
+      {
+        "field_name": "id",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "DistributionSnapshot",
+    "fields": [
+      {
+        "field_name": "maxError",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "maxError",
+        "convert": true
+      },
+      {
+        "field_name": "count",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "count",
+        "convert": true
+      },
+      {
+        "field_name": "total",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "total",
+        "convert": true
+      },
+      {
+        "field_name": "p01",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "p01",
+        "convert": true
+      },
+      {
+        "field_name": "p05",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "p05",
+        "convert": true
+      },
+      {
+        "field_name": "p10",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "p10",
+        "convert": true
+      },
+      {
+        "field_name": "p25",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "p25",
+        "convert": true
+      },
+      {
+        "field_name": "p50",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "p50",
+        "convert": true
+      },
+      {
+        "field_name": "p75",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "p75",
+        "convert": true
+      },
+      {
+        "field_name": "p90",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 10,
+        "proto_name": "p90",
+        "convert": true
+      },
+      {
+        "field_name": "p95",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 11,
+        "proto_name": "p95",
+        "convert": true
+      },
+      {
+        "field_name": "p99",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 12,
+        "proto_name": "p99",
+        "convert": true
+      },
+      {
+        "field_name": "min",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 13,
+        "proto_name": "min",
+        "convert": true
+      },
+      {
+        "field_name": "max",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 14,
+        "proto_name": "max",
+        "convert": true
+      },
+      {
+        "field_name": "avg",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 15,
+        "proto_name": "avg",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "RuntimeStats",
+    "fields": [
+      {
+        "field_name": "metrics",
+        "field_type": "std::map<string, RuntimeMetric>",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "ExchangeClientStatus",
+    "fields": [
+      {
+        "field_name": "bufferedBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "maxBufferedBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "averageBytesPerRequest",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "successfulRequestsCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4
+      },
+      {
+        "field_name": "bufferedPages",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 5
+      },
+      {
+        "field_name": "noMoreLocations",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 6
+      },
+      {
+        "field_name": "pageBufferClientStatuses",
+        "field_type": "std::list<PageBufferClientStatus>",
+        "optional": false,
+        "required": false,
+        "tag": 7
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "PageBufferClientStatus",
+    "fields": [
+      {
+        "field_name": "uri",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "state",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "lastUpdate",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "rowsReceived",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4
+      },
+      {
+        "field_name": "pagesReceived",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 5
+      },
+      {
+        "field_name": "rowsRejected",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 6
+      },
+      {
+        "field_name": "pagesRejected",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 7
+      },
+      {
+        "field_name": "requestsScheduled",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 8
+      },
+      {
+        "field_name": "requestsCompleted",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 9
+      },
+      {
+        "field_name": "requestsFailed",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 10
+      },
+      {
+        "field_name": "httpRequestState",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 11
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "LocalExchangeBufferInfo",
+    "fields": [
+      {
+        "field_name": "bufferedBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "bufferedPages",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TableFinishInfo",
+    "fields": [
+      {
+        "field_name": "serializedConnectorOutputMetadata",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "jsonLengthLimitExceeded",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "statisticsWallTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "statisticsCpuTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 4
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "SplitOperatorInfo",
+    "fields": [
+      {
+        "field_name": "splitInfoMap",
+        "field_type": "std::map<string, string>",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "HashCollisionsInfo",
+    "fields": [
+      {
+        "field_name": "weightedSumSquaredHashCollisions",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "weightedHashCollisions",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "weightedExpectedHashCollisions",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "PartitionedOutputInfo",
+    "fields": [
+      {
+        "field_name": "rowsAdded",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "pagesAdded",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "outputBufferPeakMemoryUsage",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "WindowInfo",
+    "fields": [
+      {
+        "field_name": "windowInfos",
+        "field_type": "std::list<DriverWindowInfo>",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "DriverWindowInfo",
+    "fields": [
+      {
+        "field_name": "sumSquaredDifferencesPositionsOfIndex",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "sumSquaredDifferencesSizeOfIndex",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "sumSquaredDifferencesSizeInPartition",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "totalPartitionsCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4
+      },
+      {
+        "field_name": "totalRowsCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 5
+      },
+      {
+        "field_name": "numberOfIndexes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 6
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TableWriterInfo",
+    "fields": [
+      {
+        "field_name": "pageSinkPeakMemoryUsage",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "statisticsWallTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "statisticsCpuTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "validationCpuTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 4
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TableWriterMergeInfo",
+    "fields": [
+      {
+        "field_name": "statisticsWallTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "statisticsCpuTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "DynamicFilterStats",
+    "fields": [
+      {
+        "field_name": "producerNodeIds",
+        "field_type": "std::set<PlanNodeId>",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "producerNodeIds",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "DriverStats",
+    "fields": [
+      {
+        "field_name": "lifespan",
+        "field_type": "Lifespan",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "lifespan",
+        "convert": true
+      },
+      {
+        "field_name": "createTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "createTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "startTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "startTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "endTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "endTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "queuedTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "queuedTime",
+        "convert": true
+      },
+      {
+        "field_name": "elapsedTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "elapsedTime",
+        "convert": true
+      },
+      {
+        "field_name": "userMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "userMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "revocableMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "revocableMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "systemMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "systemMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "totalScheduledTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 10,
+        "proto_name": "totalScheduledTime",
+        "convert": true
+      },
+      {
+        "field_name": "totalCpuTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 11,
+        "proto_name": "totalCpuTime",
+        "convert": true
+      },
+      {
+        "field_name": "totalBlockedTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 12,
+        "proto_name": "totalBlockedTime",
+        "convert": true
+      },
+      {
+        "field_name": "fullyBlocked",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 13,
+        "proto_name": "fullyBlocked",
+        "convert": true
+      },
+      {
+        "field_name": "blockedReasons",
+        "field_type": "std::set<BlockedReason>",
+        "optional": false,
+        "required": false,
+        "tag": 14,
+        "proto_name": "blockedReasons",
+        "convert": true
+      },
+      {
+        "field_name": "totalAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 15,
+        "proto_name": "totalAllocationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 16,
+        "proto_name": "rawInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputReadTime",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 17,
+        "proto_name": "rawInputReadTime",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 18,
+        "proto_name": "rawInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "processedInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 19,
+        "proto_name": "processedInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "processedInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 20,
+        "proto_name": "processedInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "outputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 21,
+        "proto_name": "outputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "outputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 22,
+        "proto_name": "outputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "physicalWrittenDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 23,
+        "proto_name": "physicalWrittenDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "operatorStats",
+        "field_type": "std::list<OperatorStats>",
+        "optional": false,
+        "required": false,
+        "tag": 24,
+        "proto_name": "operatorStats",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TransactionId",
+    "fields": [
+      {
+        "field_name": "uuid",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TimeZoneKey",
+    "fields": [
+      {
+        "field_name": "id",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "key",
+        "field_type": "int16_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "ResourceEstimates",
+    "fields": [
+      {
+        "field_name": "executionTime",
+        "field_type": "double",
+        "optional": true,
+        "required": false,
+        "tag": 1,
+        "proto_name": "executionTime",
+        "convert": true
+      },
+      {
+        "field_name": "cpuTime",
+        "field_type": "double",
+        "optional": true,
+        "required": false,
+        "tag": 2,
+        "proto_name": "cpuTime",
+        "convert": true
+      },
+      {
+        "field_name": "peakMemory",
+        "field_type": "double",
+        "optional": true,
+        "required": false,
+        "tag": 3,
+        "proto_name": "peakMemory",
+        "convert": true
+      },
+      {
+        "field_name": "peakTaskMemory",
+        "field_type": "double",
+        "optional": true,
+        "required": false,
+        "tag": 4,
+        "proto_name": "peakTaskMemory",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "ConnectorId",
+    "fields": [
+      {
+        "field_name": "catalogName",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "SqlFunctionId",
+    "fields": [
+      {
+        "field_name": "signature",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TypeSignature",
+    "fields": [
+      {
+        "field_name": "signature",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "ignore",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "Language",
+    "fields": [
+      {
+        "field_name": "language",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "language",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "QualifiedObjectName",
+    "fields": [
+      {
+        "field_name": "catalogName",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "schemaName",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "objectName",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TypeVariableConstraint",
+    "fields": [
+      {
+        "field_name": "name",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "name",
+        "convert": true
+      },
+      {
+        "field_name": "comparableRequired",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "comparableRequired",
+        "convert": true
+      },
+      {
+        "field_name": "orderableRequired",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "orderableRequired",
+        "convert": true
+      },
+      {
+        "field_name": "variadicBound",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "variadicBound",
+        "convert": true
+      },
+      {
+        "field_name": "nonDecimalNumericRequired",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "nonDecimalNumericRequired",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "LongVariableConstraint",
+    "fields": [
+      {
+        "field_name": "name",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "name",
+        "convert": true
+      },
+      {
+        "field_name": "expression",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "expression",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TaskSource",
+    "fields": [
+      {
+        "field_name": "planNodeId",
+        "field_type": "PlanNodeId",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "planNodeId",
+        "convert": true
+      },
+      {
+        "field_name": "splits",
+        "field_type": "std::set<ScheduledSplit>",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "splits",
+        "convert": true
+      },
+      {
+        "field_name": "noMoreSplitsForLifespan",
+        "field_type": "std::set<Lifespan>",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "noMoreSplitsForLifespan",
+        "convert": true
+      },
+      {
+        "field_name": "noMoreSplits",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "noMoreSplits",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "ScheduledSplit",
+    "fields": [
+      {
+        "field_name": "sequenceId",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "sequenceId",
+        "convert": true
+      },
+      {
+        "field_name": "planNodeId",
+        "field_type": "PlanNodeId",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "planNodeId",
+        "convert": true
+      },
+      {
+        "field_name": "split",
+        "field_type": "SplitWrapper",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "split",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
     "class_name": "TaskStatus",
     "fields": [
       {
@@ -168,7 +1570,7 @@
         "convert": true
       },
       {
-        "field_name": "taskName",
+        "field_name": "selfUri",
         "field_type": "string",
         "optional": false,
         "required": false,
@@ -282,6 +1684,42 @@
         "tag": 17,
         "proto_name": "peakNodeTotalMemoryReservationInBytes",
         "convert": true
+      },
+      {
+        "field_name": "totalCpuTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 18,
+        "proto_name": "totalCpuTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "taskAgeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 19,
+        "proto_name": "taskAgeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "queuedPartitionedSplitsWeight",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 20,
+        "proto_name": "queuedPartitionedSplitsWeight",
+        "convert": true
+      },
+      {
+        "field_name": "runningPartitionedSplitsWeight",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 21,
+        "proto_name": "runningPartitionedSplitsWeight",
+        "convert": true
       }
     ],
     "proto_name": "TaskStatus"
@@ -315,6 +1753,1428 @@
         "required": false,
         "tag": 3,
         "proto_name": "type",
+        "convert": true
+      },
+      {
+        "field_name": "retriable",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "retriable",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "StageExecutionId",
+    "fields": [
+      {
+        "field_name": "stageId",
+        "field_type": "StageId",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "id",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "OutputBufferInfo",
+    "fields": [
+      {
+        "field_name": "type",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "type",
+        "convert": true
+      },
+      {
+        "field_name": "state",
+        "field_type": "BufferState",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "state",
+        "convert": true
+      },
+      {
+        "field_name": "buffers",
+        "field_type": "std::list<BufferInfo>",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "buffers",
+        "convert": true
+      },
+      {
+        "field_name": "canAddBuffers",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "canAddBuffers",
+        "convert": true
+      },
+      {
+        "field_name": "canAddPages",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "canAddPages",
+        "convert": true
+      },
+      {
+        "field_name": "totalBufferedBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "totalBufferedBytes",
+        "convert": true
+      },
+      {
+        "field_name": "totalBufferedPages",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "totalBufferedPages",
+        "convert": true
+      },
+      {
+        "field_name": "totalRowsSent",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "totalRowsSent",
+        "convert": true
+      },
+      {
+        "field_name": "totalPagesSent",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "totalPagesSent",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "BufferInfo",
+    "fields": [
+      {
+        "field_name": "bufferId",
+        "field_type": "OutputBufferId",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "bufferId",
+        "convert": true
+      },
+      {
+        "field_name": "finished",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "finished",
+        "convert": true
+      },
+      {
+        "field_name": "bufferedPages",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "bufferedPages",
+        "convert": true
+      },
+      {
+        "field_name": "pagesSent",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "pagesSent",
+        "convert": true
+      },
+      {
+        "field_name": "pageBufferInfo",
+        "field_type": "PageBufferInfo",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "pageBufferInfo",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TaskStats",
+    "fields": [
+      {
+        "field_name": "createTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "createTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "firstStartTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "firstStartTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "lastStartTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "lastStartTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "lastEndTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "lastEndTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "endTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "endTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "elapsedTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "elapsedTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "queuedTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "queuedTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "totalDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "totalDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "queuedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "queuedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "runningDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 10,
+        "proto_name": "runningDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "blockedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 11,
+        "proto_name": "blockedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "completedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 12,
+        "proto_name": "completedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "cumulativeUserMemory",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 13,
+        "proto_name": "cumulativeUserMemory",
+        "convert": true
+      },
+      {
+        "field_name": "cumulativeTotalMemory",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 14,
+        "proto_name": "cumulativeTotalMemory",
+        "convert": true
+      },
+      {
+        "field_name": "userMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 15,
+        "proto_name": "userMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "revocableMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 16,
+        "proto_name": "revocableMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "systemMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 17,
+        "proto_name": "systemMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "peakUserMemoryInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 18,
+        "proto_name": "peakUserMemoryInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "peakTotalMemoryInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 19,
+        "proto_name": "peakTotalMemoryInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "peakNodeTotalMemoryInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 20,
+        "proto_name": "peakNodeTotalMemoryInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "totalScheduledTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 21,
+        "proto_name": "totalScheduledTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "totalCpuTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 22,
+        "proto_name": "totalCpuTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "totalBlockedTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 23,
+        "proto_name": "totalBlockedTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "fullyBlocked",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 24,
+        "proto_name": "fullyBlocked",
+        "convert": true
+      },
+      {
+        "field_name": "blockedReasons",
+        "field_type": "std::set<BlockedReason>",
+        "optional": false,
+        "required": false,
+        "tag": 25,
+        "proto_name": "blockedReasons",
+        "convert": true
+      },
+      {
+        "field_name": "totalAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 26,
+        "proto_name": "totalAllocationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 27,
+        "proto_name": "rawInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 28,
+        "proto_name": "rawInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "processedInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 29,
+        "proto_name": "processedInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "processedInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 30,
+        "proto_name": "processedInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "outputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 31,
+        "proto_name": "outputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "outputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 32,
+        "proto_name": "outputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "physicalWrittenDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 33,
+        "proto_name": "physicalWrittenDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "pipelines",
+        "field_type": "std::list<PipelineStats>",
+        "optional": false,
+        "required": false,
+        "tag": 34,
+        "proto_name": "pipelines",
+        "convert": true
+      },
+      {
+        "field_name": "queuedPartitionedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 35,
+        "proto_name": "queuedPartitionedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "queuedPartitionedSplitsWeight",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 36,
+        "proto_name": "queuedPartitionedSplitsWeight",
+        "convert": true
+      },
+      {
+        "field_name": "runningPartitionedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 37,
+        "proto_name": "runningPartitionedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "runningPartitionedSplitsWeight",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 38,
+        "proto_name": "runningPartitionedSplitsWeight",
+        "convert": true
+      },
+      {
+        "field_name": "fullGcCount",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 39,
+        "proto_name": "fullGcCount",
+        "convert": true
+      },
+      {
+        "field_name": "fullGcTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 40,
+        "proto_name": "fullGcTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "runtimeStats",
+        "field_type": "RuntimeStats",
+        "optional": false,
+        "required": false,
+        "tag": 41,
+        "proto_name": "runtimeStats",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "PipelineStats",
+    "fields": [
+      {
+        "field_name": "pipelineId",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "pipelineId",
+        "convert": true
+      },
+      {
+        "field_name": "firstStartTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "firstStartTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "lastStartTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "lastStartTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "lastEndTimeInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "lastEndTimeInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "inputPipeline",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "inputPipeline",
+        "convert": true
+      },
+      {
+        "field_name": "outputPipeline",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "outputPipeline",
+        "convert": true
+      },
+      {
+        "field_name": "totalDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "totalDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "queuedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "queuedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "queuedPartitionedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "queuedPartitionedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "queuedPartitionedSplitsWeight",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 10,
+        "proto_name": "queuedPartitionedSplitsWeight",
+        "convert": true
+      },
+      {
+        "field_name": "runningDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 11,
+        "proto_name": "runningDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "runningPartitionedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 12,
+        "proto_name": "runningPartitionedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "runningPartitionedSplitsWeight",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 13,
+        "proto_name": "runningPartitionedSplitsWeight",
+        "convert": true
+      },
+      {
+        "field_name": "blockedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 14,
+        "proto_name": "blockedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "completedDrivers",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 15,
+        "proto_name": "completedDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "userMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 16,
+        "proto_name": "userMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "revocableMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 17,
+        "proto_name": "revocableMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "systemMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 18,
+        "proto_name": "systemMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "queuedTime",
+        "field_type": "DistributionSnapshot",
+        "optional": false,
+        "required": false,
+        "tag": 19,
+        "proto_name": "queuedTime",
+        "convert": true
+      },
+      {
+        "field_name": "elapsedTime",
+        "field_type": "DistributionSnapshot",
+        "optional": false,
+        "required": false,
+        "tag": 20,
+        "proto_name": "elapsedTime",
+        "convert": true
+      },
+      {
+        "field_name": "totalScheduledTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 21,
+        "proto_name": "totalScheduledTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "totalCpuTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 22,
+        "proto_name": "totalCpuTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "totalBlockedTimeInNanos",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 23,
+        "proto_name": "totalBlockedTimeInNanos",
+        "convert": true
+      },
+      {
+        "field_name": "fullyBlocked",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 24,
+        "proto_name": "fullyBlocked",
+        "convert": true
+      },
+      {
+        "field_name": "blockedReasons",
+        "field_type": "std::set<BlockedReason>",
+        "optional": false,
+        "required": false,
+        "tag": 25,
+        "proto_name": "blockedReasons",
+        "convert": true
+      },
+      {
+        "field_name": "totalAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 26,
+        "proto_name": "totalAllocationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 27,
+        "proto_name": "rawInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 28,
+        "proto_name": "rawInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "processedInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 29,
+        "proto_name": "processedInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "processedInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 30,
+        "proto_name": "processedInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "outputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 31,
+        "proto_name": "outputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "outputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 32,
+        "proto_name": "outputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "physicalWrittenDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 33,
+        "proto_name": "physicalWrittenDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "operatorSummaries",
+        "field_type": "std::list<OperatorStats>",
+        "optional": false,
+        "required": false,
+        "tag": 34,
+        "proto_name": "operatorSummaries",
+        "convert": true
+      },
+      {
+        "field_name": "drivers",
+        "field_type": "std::list<DriverStats>",
+        "optional": false,
+        "required": false,
+        "tag": 35,
+        "proto_name": "drivers",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "RuntimeMetric",
+    "fields": [
+      {
+        "field_name": "name",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "name",
+        "convert": true
+      },
+      {
+        "field_name": "sum",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "sum",
+        "convert": true
+      },
+      {
+        "field_name": "count",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "count",
+        "convert": true
+      },
+      {
+        "field_name": "max",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "max",
+        "convert": true
+      },
+      {
+        "field_name": "min",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "min",
+        "convert": true
+      },
+      {
+        "field_name": "unit",
+        "field_type": "RuntimeUnit",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "unit",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "JoinOperatorInfo",
+    "fields": [
+      {
+        "field_name": "joinType",
+        "field_type": "JoinType",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "logHistogramProbes",
+        "field_type": "std::list<int64_t>",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "logHistogramOutput",
+        "field_type": "std::list<int64_t>",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "lookupSourcePositions",
+        "field_type": "int64_t",
+        "optional": true,
+        "required": false,
+        "tag": 4
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "SessionRepresentation",
+    "fields": [
+      {
+        "field_name": "queryId",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "queryId",
+        "convert": true
+      },
+      {
+        "field_name": "transactionId",
+        "field_type": "TransactionId",
+        "optional": true,
+        "required": false,
+        "tag": 2,
+        "proto_name": "transactionId",
+        "convert": true
+      },
+      {
+        "field_name": "clientTransactionSupport",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "clientTransactionSupport",
+        "convert": true
+      },
+      {
+        "field_name": "user",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "user",
+        "convert": true
+      },
+      {
+        "field_name": "principal",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 5,
+        "proto_name": "principal",
+        "convert": true
+      },
+      {
+        "field_name": "source",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 6,
+        "proto_name": "source",
+        "convert": true
+      },
+      {
+        "field_name": "catalog",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 7,
+        "proto_name": "catalog",
+        "convert": true
+      },
+      {
+        "field_name": "schema",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 8,
+        "proto_name": "schema",
+        "convert": true
+      },
+      {
+        "field_name": "traceToken",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 9,
+        "proto_name": "traceToken",
+        "convert": true
+      },
+      {
+        "field_name": "timeZoneKey",
+        "field_type": "TimeZoneKey",
+        "optional": false,
+        "required": false,
+        "tag": 10,
+        "proto_name": "timeZoneKey",
+        "convert": true
+      },
+      {
+        "field_name": "locale",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 11,
+        "proto_name": "locale",
+        "convert": true
+      },
+      {
+        "field_name": "remoteUserAddress",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 12,
+        "proto_name": "remoteUserAddress",
+        "convert": true
+      },
+      {
+        "field_name": "userAgent",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 13,
+        "proto_name": "userAgent",
+        "convert": true
+      },
+      {
+        "field_name": "clientInfo",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 14,
+        "proto_name": "clientInfo",
+        "convert": true
+      },
+      {
+        "field_name": "clientTags",
+        "field_type": "std::set<string>",
+        "optional": false,
+        "required": false,
+        "tag": 15,
+        "proto_name": "clientTags",
+        "convert": true
+      },
+      {
+        "field_name": "resourceEstimates",
+        "field_type": "ResourceEstimates",
+        "optional": false,
+        "required": false,
+        "tag": 16,
+        "proto_name": "resourceEstimates",
+        "convert": true
+      },
+      {
+        "field_name": "startTime",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 17,
+        "proto_name": "startTime",
+        "convert": true
+      },
+      {
+        "field_name": "systemProperties",
+        "field_type": "std::map<string, string>",
+        "optional": false,
+        "required": false,
+        "tag": 18,
+        "proto_name": "systemProperties",
+        "convert": true
+      },
+      {
+        "field_name": "catalogProperties",
+        "field_type": "std::map<ConnectorId, std::map<string, string>>",
+        "optional": false,
+        "required": false,
+        "tag": 19,
+        "proto_name": "catalogProperties",
+        "convert": true
+      },
+      {
+        "field_name": "unprocessedCatalogProperties",
+        "field_type": "std::map<string, std::map<string, string>>",
+        "optional": false,
+        "required": false,
+        "tag": 20,
+        "proto_name": "unprocessedCatalogProperties",
+        "convert": true
+      },
+      {
+        "field_name": "roles",
+        "field_type": "std::map<string, SelectedRole>",
+        "optional": false,
+        "required": false,
+        "tag": 21,
+        "proto_name": "roles",
+        "convert": true
+      },
+      {
+        "field_name": "preparedStatements",
+        "field_type": "std::map<string, string>",
+        "optional": false,
+        "required": false,
+        "tag": 22,
+        "proto_name": "preparedStatements",
+        "convert": true
+      },
+      {
+        "field_name": "sessionFunctions",
+        "field_type": "std::map<SqlFunctionId, SqlInvokedFunction>",
+        "optional": false,
+        "required": false,
+        "tag": 23,
+        "proto_name": "sessionFunctions",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "SelectedRole",
+    "fields": [
+      {
+        "field_name": "type",
+        "field_type": "Type",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "type",
+        "convert": true
+      },
+      {
+        "field_name": "role",
+        "field_type": "string",
+        "optional": true,
+        "required": false,
+        "tag": 2,
+        "proto_name": "role",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "Parameter",
+    "fields": [
+      {
+        "field_name": "name",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "name",
+        "convert": true
+      },
+      {
+        "field_name": "type",
+        "field_type": "TypeSignature",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "type",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "RoutineCharacteristics",
+    "fields": [
+      {
+        "field_name": "language",
+        "field_type": "Language",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "language",
+        "convert": true
+      },
+      {
+        "field_name": "determinism",
+        "field_type": "Determinism",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "determinism",
+        "convert": true
+      },
+      {
+        "field_name": "nullCallClause",
+        "field_type": "NullCallClause",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "nullCallClause",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "Signature",
+    "fields": [
+      {
+        "field_name": "name",
+        "field_type": "QualifiedObjectName",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "name",
+        "convert": true
+      },
+      {
+        "field_name": "kind",
+        "field_type": "FunctionKind",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "kind",
+        "convert": true
+      },
+      {
+        "field_name": "returnType",
+        "field_type": "TypeSignature",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "returnType",
+        "convert": true
+      },
+      {
+        "field_name": "argumentTypes",
+        "field_type": "std::list<TypeSignature>",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "argumentTypes",
+        "convert": true
+      },
+      {
+        "field_name": "variableArity",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "variableArity",
+        "convert": true
+      },
+      {
+        "field_name": "typeVariableConstraints",
+        "field_type": "std::list<TypeVariableConstraint>",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "typeVariableConstraints",
+        "convert": true
+      },
+      {
+        "field_name": "longVariableConstraints",
+        "field_type": "std::list<LongVariableConstraint>",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "longVariableConstraints",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "OutputBuffers",
+    "fields": [
+      {
+        "field_name": "type",
+        "field_type": "BufferType",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "type",
+        "convert": true
+      },
+      {
+        "field_name": "version",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "version",
+        "convert": true
+      },
+      {
+        "field_name": "noMoreBufferIds",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "noMoreBufferIds",
+        "convert": true
+      },
+      {
+        "field_name": "buffers",
+        "field_type": "std::map<OutputBufferId, int32_t>",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "buffers",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TaskUpdateRequest",
+    "fields": [
+      {
+        "field_name": "session",
+        "field_type": "SessionRepresentation",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "session",
+        "convert": true
+      },
+      {
+        "field_name": "extraCredentials",
+        "field_type": "std::map<string, string>",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "extraCredentials",
+        "convert": true
+      },
+      {
+        "field_name": "fragment",
+        "field_type": "binary",
+        "optional": true,
+        "required": false,
+        "tag": 3,
+        "proto_name": "fragment",
+        "convert": true
+      },
+      {
+        "field_name": "sources",
+        "field_type": "std::list<TaskSource>",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "sources",
+        "convert": true
+      },
+      {
+        "field_name": "outputIds",
+        "field_type": "OutputBuffers",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "outputIds",
+        "convert": true
+      },
+      {
+        "field_name": "tableWriteInfo",
+        "field_type": "TableWriteInfoWrapper",
+        "optional": true,
+        "required": false,
+        "tag": 6,
+        "proto_name": "tableWriteInfo",
         "convert": true
       }
     ]
@@ -393,6 +3253,711 @@
         "required": false,
         "tag": 8,
         "proto_name": "remoteHost",
+        "convert": true
+      },
+      {
+        "field_name": "errorCause",
+        "field_type": "ErrorCause",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "errorCause",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TaskId",
+    "fields": [
+      {
+        "field_name": "stageExecutionId",
+        "field_type": "StageExecutionId",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "id",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "attemptNumber",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "OperatorInfoUnion",
+    "fields": [
+      {
+        "field_name": "exchangeClientStatus",
+        "field_type": "ExchangeClientStatus",
+        "optional": false,
+        "required": false,
+        "tag": 1
+      },
+      {
+        "field_name": "localExchangeBufferInfo",
+        "field_type": "LocalExchangeBufferInfo",
+        "optional": false,
+        "required": false,
+        "tag": 2
+      },
+      {
+        "field_name": "tableFinishInfo",
+        "field_type": "TableFinishInfo",
+        "optional": false,
+        "required": false,
+        "tag": 3
+      },
+      {
+        "field_name": "splitOperatorInfo",
+        "field_type": "SplitOperatorInfo",
+        "optional": false,
+        "required": false,
+        "tag": 4
+      },
+      {
+        "field_name": "hashCollisionsInfo",
+        "field_type": "HashCollisionsInfo",
+        "optional": false,
+        "required": false,
+        "tag": 5
+      },
+      {
+        "field_name": "partitionedOutputInfo",
+        "field_type": "PartitionedOutputInfo",
+        "optional": false,
+        "required": false,
+        "tag": 6
+      },
+      {
+        "field_name": "joinOperatorInfo",
+        "field_type": "JoinOperatorInfo",
+        "optional": false,
+        "required": false,
+        "tag": 7
+      },
+      {
+        "field_name": "windowInfo",
+        "field_type": "WindowInfo",
+        "optional": false,
+        "required": false,
+        "tag": 8
+      },
+      {
+        "field_name": "tableWriterInfo",
+        "field_type": "TableWriterInfo",
+        "optional": false,
+        "required": false,
+        "tag": 9
+      },
+      {
+        "field_name": "tableWriterMergeInfo",
+        "field_type": "TableWriterMergeInfo",
+        "optional": false,
+        "required": false,
+        "tag": 10
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "SqlInvokedFunction",
+    "fields": [
+      {
+        "field_name": "parameters",
+        "field_type": "std::list<Parameter>",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "parameters",
+        "convert": true
+      },
+      {
+        "field_name": "description",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "description",
+        "convert": true
+      },
+      {
+        "field_name": "routineCharacteristics",
+        "field_type": "RoutineCharacteristics",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "routineCharacteristics",
+        "convert": true
+      },
+      {
+        "field_name": "body",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "body",
+        "convert": true
+      },
+      {
+        "field_name": "variableArity",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "variableArity",
+        "convert": true
+      },
+      {
+        "field_name": "signature",
+        "field_type": "Signature",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "signature",
+        "convert": true
+      },
+      {
+        "field_name": "functionId",
+        "field_type": "SqlFunctionId",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "functionId",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "TaskInfo",
+    "fields": [
+      {
+        "field_name": "taskId",
+        "field_type": "TaskId",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "taskId",
+        "convert": true
+      },
+      {
+        "field_name": "taskStatus",
+        "field_type": "TaskStatus",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "taskStatus",
+        "convert": true
+      },
+      {
+        "field_name": "lastHeartbeatInMillis",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "lastHeartbeatInMillis",
+        "convert": true
+      },
+      {
+        "field_name": "outputBuffers",
+        "field_type": "OutputBufferInfo",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "outputBuffers",
+        "convert": true
+      },
+      {
+        "field_name": "noMoreSplits",
+        "field_type": "std::set<PlanNodeId>",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "noMoreSplits",
+        "convert": true
+      },
+      {
+        "field_name": "stats",
+        "field_type": "TaskStats",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "stats",
+        "convert": true
+      },
+      {
+        "field_name": "needsPlan",
+        "field_type": "bool",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "needsPlan",
+        "convert": true
+      },
+      {
+        "field_name": "metadataUpdates",
+        "field_type": "MetadataUpdatesWrapper",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "metadataUpdates",
+        "convert": true
+      },
+      {
+        "field_name": "nodeId",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "nodeId",
+        "convert": true
+      }
+    ]
+  },
+  {
+    "struct": true,
+    "class_name": "OperatorStats",
+    "fields": [
+      {
+        "field_name": "stageId",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 1,
+        "proto_name": "stageId",
+        "convert": true
+      },
+      {
+        "field_name": "stageExecutionId",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 2,
+        "proto_name": "stageExecutionId",
+        "convert": true
+      },
+      {
+        "field_name": "pipelineId",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 3,
+        "proto_name": "pipelineId",
+        "convert": true
+      },
+      {
+        "field_name": "operatorId",
+        "field_type": "int32_t",
+        "optional": false,
+        "required": false,
+        "tag": 4,
+        "proto_name": "operatorId",
+        "convert": true
+      },
+      {
+        "field_name": "planNodeId",
+        "field_type": "PlanNodeId",
+        "optional": false,
+        "required": false,
+        "tag": 5,
+        "proto_name": "planNodeId",
+        "convert": true
+      },
+      {
+        "field_name": "operatorType",
+        "field_type": "string",
+        "optional": false,
+        "required": false,
+        "tag": 6,
+        "proto_name": "operatorType",
+        "convert": true
+      },
+      {
+        "field_name": "totalDrivers",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 7,
+        "proto_name": "totalDrivers",
+        "convert": true
+      },
+      {
+        "field_name": "addInputCalls",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 8,
+        "proto_name": "addInputCalls",
+        "convert": true
+      },
+      {
+        "field_name": "addInputWall",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 9,
+        "proto_name": "addInputWall",
+        "convert": true
+      },
+      {
+        "field_name": "addInputCpu",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 10,
+        "proto_name": "addInputCpu",
+        "convert": true
+      },
+      {
+        "field_name": "addInputAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 11,
+        "proto_name": "addInputAllocationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 12,
+        "proto_name": "rawInputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "rawInputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 13,
+        "proto_name": "rawInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "inputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 14,
+        "proto_name": "inputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "inputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 15,
+        "proto_name": "inputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "sumSquaredInputPositions",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 16,
+        "proto_name": "sumSquaredInputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "getOutputCalls",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 17,
+        "proto_name": "getOutputCalls",
+        "convert": true
+      },
+      {
+        "field_name": "getOutputWall",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 18,
+        "proto_name": "getOutputWall",
+        "convert": true
+      },
+      {
+        "field_name": "getOutputCpu",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 19,
+        "proto_name": "getOutputCpu",
+        "convert": true
+      },
+      {
+        "field_name": "getOutputAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 20,
+        "proto_name": "getOutputAllocationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "outputDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 21,
+        "proto_name": "outputDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "outputPositions",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 22,
+        "proto_name": "outputPositions",
+        "convert": true
+      },
+      {
+        "field_name": "physicalWrittenDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 23,
+        "proto_name": "physicalWrittenDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "additionalCpu",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 24,
+        "proto_name": "additionalCpu",
+        "convert": true
+      },
+      {
+        "field_name": "blockedWall",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 25,
+        "proto_name": "blockedWall",
+        "convert": true
+      },
+      {
+        "field_name": "finishCalls",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 26,
+        "proto_name": "finishCalls",
+        "convert": true
+      },
+      {
+        "field_name": "finishWall",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 27,
+        "proto_name": "finishWall",
+        "convert": true
+      },
+      {
+        "field_name": "finishCpu",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 28,
+        "proto_name": "finishCpu",
+        "convert": true
+      },
+      {
+        "field_name": "finishAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 29,
+        "proto_name": "finishAllocationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "userMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 30,
+        "proto_name": "userMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "revocableMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 31,
+        "proto_name": "revocableMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "systemMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 32,
+        "proto_name": "systemMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "peakUserMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 33,
+        "proto_name": "peakUserMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "peakSystemMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 34,
+        "proto_name": "peakSystemMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "peakTotalMemoryReservationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 35,
+        "proto_name": "peakTotalMemoryReservationInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "spilledDataSizeInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 36,
+        "proto_name": "spilledDataSizeInBytes",
+        "convert": true
+      },
+      {
+        "field_name": "runtimeStats",
+        "field_type": "RuntimeStats",
+        "optional": false,
+        "required": false,
+        "tag": 37,
+        "proto_name": "runtimeStats",
+        "convert": true
+      },
+      {
+        "field_name": "blockedReason",
+        "field_type": "BlockedReason",
+        "optional": true,
+        "required": false,
+        "tag": 38,
+        "proto_name": "blockedReason",
+        "convert": true
+      },
+      {
+        "field_name": "infoUnion",
+        "field_type": "OperatorInfoUnion",
+        "optional": false,
+        "required": false,
+        "tag": 39,
+        "proto_name": "infoUnion"
+      },
+      {
+        "field_name": "nullJoinBuildKeyCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 40,
+        "proto_name": "nullJoinBuildKeyCount",
+        "convert": true
+      },
+      {
+        "field_name": "joinBuildKeyCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 41,
+        "proto_name": "joinBuildKeyCount",
+        "convert": true
+      },
+      {
+        "field_name": "nullJoinProbeKeyCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 42,
+        "proto_name": "nullJoinProbeKeyCount",
+        "convert": true
+      },
+      {
+        "field_name": "joinProbeKeyCount",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 43,
+        "proto_name": "joinProbeKeyCount",
+        "convert": true
+      },
+      {
+        "field_name": "dynamicFilterStats",
+        "field_type": "DynamicFilterStats",
+        "optional": false,
+        "required": false,
+        "tag": 44,
+        "proto_name": "dynamicFilterStats",
+        "convert": true
+      },
+      {
+        "field_name": "isBlockedCalls",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 45,
+        "proto_name": "isBlockedCalls",
+        "convert": true
+      },
+      {
+        "field_name": "isBlockedWall",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 46,
+        "proto_name": "isBlockedWall",
+        "convert": true
+      },
+      {
+        "field_name": "isBlockedCpu",
+        "field_type": "double",
+        "optional": false,
+        "required": false,
+        "tag": 47,
+        "proto_name": "isBlockedCpu",
+        "convert": true
+      },
+      {
+        "field_name": "isBlockedAllocationInBytes",
+        "field_type": "int64_t",
+        "optional": false,
+        "required": false,
+        "tag": 48,
+        "proto_name": "isBlockedAllocationInBytes",
         "convert": true
       }
     ]

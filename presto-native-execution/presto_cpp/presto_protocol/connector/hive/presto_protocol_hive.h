@@ -194,6 +194,7 @@ void from_json(const json& j, Storage& p);
 } // namespace facebook::presto::protocol::hive
 namespace facebook::presto::protocol::hive {
 struct Table {
+  std::shared_ptr<String> catalogName = {};
   String databaseName = {};
   String tableName = {};
   String owner = {};

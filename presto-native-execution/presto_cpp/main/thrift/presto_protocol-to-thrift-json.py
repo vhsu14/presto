@@ -125,8 +125,10 @@ def main():
                             "Thrift struct missing from presto_protocol: "
                             + thrift_item.class_name
                         )
-        else:
-            eprint("Thrift item missing from presto_protocol: " + item.class_name)
+        elif "class_name" in thrift_item:
+            if thrift_item.class_name in config.SkipStruct:
+                continue
+            eprint("Thrift item missing from presto_protocol: " + thrift_item.class_name)
 
     result.extend(thrift)
     print(util.to_json(result))

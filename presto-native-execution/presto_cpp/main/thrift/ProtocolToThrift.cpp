@@ -65,10 +65,61 @@ void toThrift(const std::vector<P>& p, std::vector<T>& t) {
 }
 
 void toThrift(const protocol::TaskState& proto, thrift::TaskState& thrift) {
-  thrift = (thrift::TaskState)((int)proto);
+  thrift = (thrift::TaskState)(static_cast<int>(proto));
 }
 void toThrift(const protocol::ErrorType& proto, thrift::ErrorType& thrift) {
-  thrift = (thrift::ErrorType)((int)proto);
+  thrift = (thrift::ErrorType)(static_cast<int>(proto));
+}
+void toThrift(const protocol::ErrorCause& proto, thrift::ErrorCause& thrift) {
+  thrift = (thrift::ErrorCause)(static_cast<int>(proto));
+}
+void toThrift(const protocol::BufferState& proto, thrift::BufferState& thrift) {
+  thrift = (thrift::BufferState)(static_cast<int>(proto));
+}
+void toThrift(
+    const protocol::BlockedReason& proto,
+    thrift::BlockedReason& thrift) {
+  thrift = (thrift::BlockedReason)(static_cast<int>(proto));
+}
+void toThrift(const protocol::RuntimeUnit& proto, thrift::RuntimeUnit& thrift) {
+  thrift = (thrift::RuntimeUnit)(static_cast<int>(proto));
+}
+void toThrift(const protocol::JoinType& proto, thrift::JoinType& thrift) {
+  thrift = (thrift::JoinType)(static_cast<int>(proto));
+}
+void toThrift(const protocol::Type& proto, thrift::Type& thrift) {
+  thrift = (thrift::Type)(static_cast<int>(proto));
+}
+void toThrift(const protocol::Determinism& proto, thrift::Determinism& thrift) {
+  thrift = (thrift::Determinism)(static_cast<int>(proto));
+}
+void toThrift(
+    const protocol::NullCallClause& proto,
+    thrift::NullCallClause& thrift) {
+  thrift = (thrift::NullCallClause)(static_cast<int>(proto));
+}
+void toThrift(
+    const protocol::FunctionKind& proto,
+    thrift::FunctionKind& thrift) {
+  thrift = (thrift::FunctionKind)(static_cast<int>(proto));
+}
+void toThrift(const protocol::BufferType& proto, thrift::BufferType& thrift) {
+  thrift = (thrift::BufferType)(static_cast<int>(proto));
+}
+void toThrift(
+    const protocol::SplitWrapper& proto,
+    thrift::SplitWrapper& thrift) {
+  toThrift(proto., *thrift.split_ref());
+}
+void toThrift(
+    const protocol::TableWriteInfoWrapper& proto,
+    thrift::TableWriteInfoWrapper& thrift) {
+  toThrift(proto., *thrift.tableWriteInfo_ref());
+}
+void toThrift(
+    const protocol::MetadataUpdatesWrapper& proto,
+    thrift::MetadataUpdatesWrapper& thrift) {
+  toThrift(proto., *thrift.metadataUpdates_ref());
 }
 void toThrift(const protocol::Lifespan& proto, thrift::Lifespan& thrift) {
   toThrift(proto.isgroup, *thrift.grouped_ref());
@@ -88,6 +139,251 @@ void toThrift(const protocol::HostAddress& proto, thrift::HostAddress& thrift) {
     thrift.port_ref() = std::stoi(parts[1]);
   }
 }
+void toThrift(const protocol::StageId& proto, thrift::StageId& thrift) {
+  toThrift(proto., *thrift.queryId_ref());
+  toThrift(proto., *thrift.id_ref());
+}
+void toThrift(
+    const protocol::OutputBufferId& proto,
+    thrift::OutputBufferId& thrift) {
+  toThrift(proto., *thrift.id_ref());
+}
+void toThrift(
+    const protocol::PageBufferInfo& proto,
+    thrift::PageBufferInfo& thrift) {
+  toThrift(proto.partition, *thrift.partition_ref());
+  toThrift(proto.bufferedPages, *thrift.bufferedPages_ref());
+  toThrift(proto.bufferedBytes, *thrift.bufferedBytes_ref());
+  toThrift(proto.rowsAdded, *thrift.rowsAdded_ref());
+  toThrift(proto.pagesAdded, *thrift.pagesAdded_ref());
+}
+void toThrift(const protocol::PlanNodeId& proto, thrift::PlanNodeId& thrift) {
+  toThrift(proto., *thrift.id_ref());
+}
+void toThrift(
+    const protocol::DistributionSnapshot& proto,
+    thrift::DistributionSnapshot& thrift) {
+  toThrift(proto.maxError, *thrift.maxError_ref());
+  toThrift(proto.count, *thrift.count_ref());
+  toThrift(proto.total, *thrift.total_ref());
+  toThrift(proto.p01, *thrift.p01_ref());
+  toThrift(proto.p05, *thrift.p05_ref());
+  toThrift(proto.p10, *thrift.p10_ref());
+  toThrift(proto.p25, *thrift.p25_ref());
+  toThrift(proto.p50, *thrift.p50_ref());
+  toThrift(proto.p75, *thrift.p75_ref());
+  toThrift(proto.p90, *thrift.p90_ref());
+  toThrift(proto.p95, *thrift.p95_ref());
+  toThrift(proto.p99, *thrift.p99_ref());
+  toThrift(proto.min, *thrift.min_ref());
+  toThrift(proto.max, *thrift.max_ref());
+  toThrift(proto.avg, *thrift.avg_ref());
+}
+void toThrift(
+    const protocol::RuntimeStats& proto,
+    thrift::RuntimeStats& thrift) {
+  toThrift(proto., *thrift.metrics_ref());
+}
+void toThrift(
+    const protocol::ExchangeClientStatus& proto,
+    thrift::ExchangeClientStatus& thrift) {
+  toThrift(proto., *thrift.bufferedBytes_ref());
+  toThrift(proto., *thrift.maxBufferedBytes_ref());
+  toThrift(proto., *thrift.averageBytesPerRequest_ref());
+  toThrift(proto., *thrift.successfulRequestsCount_ref());
+  toThrift(proto., *thrift.bufferedPages_ref());
+  toThrift(proto., *thrift.noMoreLocations_ref());
+  toThrift(proto., *thrift.pageBufferClientStatuses_ref());
+}
+void toThrift(
+    const protocol::PageBufferClientStatus& proto,
+    thrift::PageBufferClientStatus& thrift) {
+  toThrift(proto., *thrift.uri_ref());
+  toThrift(proto., *thrift.state_ref());
+  toThrift(proto., *thrift.lastUpdate_ref());
+  toThrift(proto., *thrift.rowsReceived_ref());
+  toThrift(proto., *thrift.pagesReceived_ref());
+  toThrift(proto., *thrift.rowsRejected_ref());
+  toThrift(proto., *thrift.pagesRejected_ref());
+  toThrift(proto., *thrift.requestsScheduled_ref());
+  toThrift(proto., *thrift.requestsCompleted_ref());
+  toThrift(proto., *thrift.requestsFailed_ref());
+  toThrift(proto., *thrift.httpRequestState_ref());
+}
+void toThrift(
+    const protocol::LocalExchangeBufferInfo& proto,
+    thrift::LocalExchangeBufferInfo& thrift) {
+  toThrift(proto., *thrift.bufferedBytes_ref());
+  toThrift(proto., *thrift.bufferedPages_ref());
+}
+void toThrift(
+    const protocol::TableFinishInfo& proto,
+    thrift::TableFinishInfo& thrift) {
+  toThrift(proto., *thrift.serializedConnectorOutputMetadata_ref());
+  toThrift(proto., *thrift.jsonLengthLimitExceeded_ref());
+  toThrift(proto., *thrift.statisticsWallTime_ref());
+  toThrift(proto., *thrift.statisticsCpuTime_ref());
+}
+void toThrift(
+    const protocol::SplitOperatorInfo& proto,
+    thrift::SplitOperatorInfo& thrift) {
+  toThrift(proto., *thrift.splitInfoMap_ref());
+}
+void toThrift(
+    const protocol::HashCollisionsInfo& proto,
+    thrift::HashCollisionsInfo& thrift) {
+  toThrift(proto., *thrift.weightedSumSquaredHashCollisions_ref());
+  toThrift(proto., *thrift.weightedHashCollisions_ref());
+  toThrift(proto., *thrift.weightedExpectedHashCollisions_ref());
+}
+void toThrift(
+    const protocol::PartitionedOutputInfo& proto,
+    thrift::PartitionedOutputInfo& thrift) {
+  toThrift(proto., *thrift.rowsAdded_ref());
+  toThrift(proto., *thrift.pagesAdded_ref());
+  toThrift(proto., *thrift.outputBufferPeakMemoryUsage_ref());
+}
+void toThrift(const protocol::WindowInfo& proto, thrift::WindowInfo& thrift) {
+  toThrift(proto., *thrift.windowInfos_ref());
+}
+void toThrift(
+    const protocol::DriverWindowInfo& proto,
+    thrift::DriverWindowInfo& thrift) {
+  toThrift(proto., *thrift.sumSquaredDifferencesPositionsOfIndex_ref());
+  toThrift(proto., *thrift.sumSquaredDifferencesSizeOfIndex_ref());
+  toThrift(proto., *thrift.sumSquaredDifferencesSizeInPartition_ref());
+  toThrift(proto., *thrift.totalPartitionsCount_ref());
+  toThrift(proto., *thrift.totalRowsCount_ref());
+  toThrift(proto., *thrift.numberOfIndexes_ref());
+}
+void toThrift(
+    const protocol::TableWriterInfo& proto,
+    thrift::TableWriterInfo& thrift) {
+  toThrift(proto., *thrift.pageSinkPeakMemoryUsage_ref());
+  toThrift(proto., *thrift.statisticsWallTime_ref());
+  toThrift(proto., *thrift.statisticsCpuTime_ref());
+  toThrift(proto., *thrift.validationCpuTime_ref());
+}
+void toThrift(
+    const protocol::TableWriterMergeInfo& proto,
+    thrift::TableWriterMergeInfo& thrift) {
+  toThrift(proto., *thrift.statisticsWallTime_ref());
+  toThrift(proto., *thrift.statisticsCpuTime_ref());
+}
+void toThrift(
+    const protocol::DynamicFilterStats& proto,
+    thrift::DynamicFilterStats& thrift) {
+  toThrift(proto.producerNodeIds, *thrift.producerNodeIds_ref());
+}
+void toThrift(const protocol::DriverStats& proto, thrift::DriverStats& thrift) {
+  toThrift(proto.lifespan, *thrift.lifespan_ref());
+  toThrift(proto.createTimeInMillis, *thrift.createTimeInMillis_ref());
+  toThrift(proto.startTimeInMillis, *thrift.startTimeInMillis_ref());
+  toThrift(proto.endTimeInMillis, *thrift.endTimeInMillis_ref());
+  toThrift(proto.queuedTime, *thrift.queuedTime_ref());
+  toThrift(proto.elapsedTime, *thrift.elapsedTime_ref());
+  toThrift(
+      proto.userMemoryReservationInBytes,
+      *thrift.userMemoryReservationInBytes_ref());
+  toThrift(
+      proto.revocableMemoryReservationInBytes,
+      *thrift.revocableMemoryReservationInBytes_ref());
+  toThrift(
+      proto.systemMemoryReservationInBytes,
+      *thrift.systemMemoryReservationInBytes_ref());
+  toThrift(proto.totalScheduledTime, *thrift.totalScheduledTime_ref());
+  toThrift(proto.totalCpuTime, *thrift.totalCpuTime_ref());
+  toThrift(proto.totalBlockedTime, *thrift.totalBlockedTime_ref());
+  toThrift(proto.fullyBlocked, *thrift.fullyBlocked_ref());
+  toThrift(proto.blockedReasons, *thrift.blockedReasons_ref());
+  toThrift(proto.totalAllocationInBytes, *thrift.totalAllocationInBytes_ref());
+  toThrift(
+      proto.rawInputDataSizeInBytes, *thrift.rawInputDataSizeInBytes_ref());
+  toThrift(proto.rawInputReadTime, *thrift.rawInputReadTime_ref());
+  toThrift(proto.rawInputPositions, *thrift.rawInputPositions_ref());
+  toThrift(
+      proto.processedInputDataSizeInBytes,
+      *thrift.processedInputDataSizeInBytes_ref());
+  toThrift(
+      proto.processedInputPositions, *thrift.processedInputPositions_ref());
+  toThrift(proto.outputDataSizeInBytes, *thrift.outputDataSizeInBytes_ref());
+  toThrift(proto.outputPositions, *thrift.outputPositions_ref());
+  toThrift(
+      proto.physicalWrittenDataSizeInBytes,
+      *thrift.physicalWrittenDataSizeInBytes_ref());
+  toThrift(proto.operatorStats, *thrift.operatorStats_ref());
+}
+void toThrift(
+    const protocol::TransactionId& proto,
+    thrift::TransactionId& thrift) {
+  toThrift(proto., *thrift.uuid_ref());
+}
+void toThrift(const protocol::TimeZoneKey& proto, thrift::TimeZoneKey& thrift) {
+  toThrift(proto., *thrift.id_ref());
+  toThrift(proto., *thrift.key_ref());
+}
+void toThrift(
+    const protocol::ResourceEstimates& proto,
+    thrift::ResourceEstimates& thrift) {
+  toThrift(proto.executionTime, thrift.executionTime_ref());
+  toThrift(proto.cpuTime, thrift.cpuTime_ref());
+  toThrift(proto.peakMemory, thrift.peakMemory_ref());
+  toThrift(proto.peakTaskMemory, thrift.peakTaskMemory_ref());
+}
+void toThrift(const protocol::ConnectorId& proto, thrift::ConnectorId& thrift) {
+  toThrift(proto., *thrift.catalogName_ref());
+}
+void toThrift(
+    const protocol::SqlFunctionId& proto,
+    thrift::SqlFunctionId& thrift) {
+  toThrift(proto., *thrift.signature_ref());
+}
+void toThrift(
+    const protocol::TypeSignature& proto,
+    thrift::TypeSignature& thrift) {
+  toThrift(proto., *thrift.signature_ref());
+  toThrift(proto., *thrift.ignore_ref());
+}
+void toThrift(const protocol::Language& proto, thrift::Language& thrift) {
+  toThrift(proto.language, *thrift.language_ref());
+}
+void toThrift(
+    const protocol::QualifiedObjectName& proto,
+    thrift::QualifiedObjectName& thrift) {
+  toThrift(proto., *thrift.catalogName_ref());
+  toThrift(proto., *thrift.schemaName_ref());
+  toThrift(proto., *thrift.objectName_ref());
+}
+void toThrift(
+    const protocol::TypeVariableConstraint& proto,
+    thrift::TypeVariableConstraint& thrift) {
+  toThrift(proto.name, *thrift.name_ref());
+  toThrift(proto.comparableRequired, *thrift.comparableRequired_ref());
+  toThrift(proto.orderableRequired, *thrift.orderableRequired_ref());
+  toThrift(proto.variadicBound, *thrift.variadicBound_ref());
+  toThrift(
+      proto.nonDecimalNumericRequired, *thrift.nonDecimalNumericRequired_ref());
+}
+void toThrift(
+    const protocol::LongVariableConstraint& proto,
+    thrift::LongVariableConstraint& thrift) {
+  toThrift(proto.name, *thrift.name_ref());
+  toThrift(proto.expression, *thrift.expression_ref());
+}
+void toThrift(const protocol::TaskSource& proto, thrift::TaskSource& thrift) {
+  toThrift(proto.planNodeId, *thrift.planNodeId_ref());
+  toThrift(proto.splits, *thrift.splits_ref());
+  toThrift(
+      proto.noMoreSplitsForLifespan, *thrift.noMoreSplitsForLifespan_ref());
+  toThrift(proto.noMoreSplits, *thrift.noMoreSplits_ref());
+}
+void toThrift(
+    const protocol::ScheduledSplit& proto,
+    thrift::ScheduledSplit& thrift) {
+  toThrift(proto.sequenceId, *thrift.sequenceId_ref());
+  toThrift(proto.planNodeId, *thrift.planNodeId_ref());
+  toThrift(proto.split, *thrift.split_ref());
+}
 void toThrift(const protocol::TaskStatus& proto, thrift::TaskStatus& thrift) {
   toThrift(
       proto.taskInstanceIdLeastSignificantBits,
@@ -97,7 +393,7 @@ void toThrift(const protocol::TaskStatus& proto, thrift::TaskStatus& thrift) {
       *thrift.taskInstanceIdMostSignificantBits_ref());
   toThrift(proto.version, *thrift.version_ref());
   toThrift(proto.state, *thrift.state_ref());
-  toThrift(proto.self, *thrift.taskName_ref());
+  toThrift(proto.self, *thrift.selfUri_ref());
   toThrift(proto.completedDriverGroups, *thrift.completedDriverGroups_ref());
   toThrift(proto.failures, *thrift.failures_ref());
   toThrift(
@@ -121,11 +417,264 @@ void toThrift(const protocol::TaskStatus& proto, thrift::TaskStatus& thrift) {
   toThrift(
       proto.peakNodeTotalMemoryReservationInBytes,
       *thrift.peakNodeTotalMemoryReservationInBytes_ref());
+  toThrift(proto.totalCpuTimeInNanos, *thrift.totalCpuTimeInNanos_ref());
+  toThrift(proto.taskAgeInMillis, *thrift.taskAgeInMillis_ref());
+  toThrift(
+      proto.queuedPartitionedSplitsWeight,
+      *thrift.queuedPartitionedSplitsWeight_ref());
+  toThrift(
+      proto.runningPartitionedSplitsWeight,
+      *thrift.runningPartitionedSplitsWeight_ref());
 }
 void toThrift(const protocol::ErrorCode& proto, thrift::ErrorCode& thrift) {
   toThrift(proto.code, *thrift.code_ref());
   toThrift(proto.name, *thrift.name_ref());
   toThrift(proto.type, *thrift.type_ref());
+  toThrift(proto.retriable, *thrift.retriable_ref());
+}
+void toThrift(
+    const protocol::StageExecutionId& proto,
+    thrift::StageExecutionId& thrift) {
+  toThrift(proto., *thrift.stageId_ref());
+  toThrift(proto., *thrift.id_ref());
+}
+void toThrift(
+    const protocol::OutputBufferInfo& proto,
+    thrift::OutputBufferInfo& thrift) {
+  toThrift(proto.type, *thrift.type_ref());
+  toThrift(proto.state, *thrift.state_ref());
+  toThrift(proto.buffers, *thrift.buffers_ref());
+  toThrift(proto.canAddBuffers, *thrift.canAddBuffers_ref());
+  toThrift(proto.canAddPages, *thrift.canAddPages_ref());
+  toThrift(proto.totalBufferedBytes, *thrift.totalBufferedBytes_ref());
+  toThrift(proto.totalBufferedPages, *thrift.totalBufferedPages_ref());
+  toThrift(proto.totalRowsSent, *thrift.totalRowsSent_ref());
+  toThrift(proto.totalPagesSent, *thrift.totalPagesSent_ref());
+}
+void toThrift(const protocol::BufferInfo& proto, thrift::BufferInfo& thrift) {
+  toThrift(proto.bufferId, *thrift.bufferId_ref());
+  toThrift(proto.finished, *thrift.finished_ref());
+  toThrift(proto.bufferedPages, *thrift.bufferedPages_ref());
+  toThrift(proto.pagesSent, *thrift.pagesSent_ref());
+  toThrift(proto.pageBufferInfo, *thrift.pageBufferInfo_ref());
+}
+void toThrift(const protocol::TaskStats& proto, thrift::TaskStats& thrift) {
+  toThrift(proto.createTimeInMillis, *thrift.createTimeInMillis_ref());
+  toThrift(proto.firstStartTimeInMillis, *thrift.firstStartTimeInMillis_ref());
+  toThrift(proto.lastStartTimeInMillis, *thrift.lastStartTimeInMillis_ref());
+  toThrift(proto.lastEndTimeInMillis, *thrift.lastEndTimeInMillis_ref());
+  toThrift(proto.endTimeInMillis, *thrift.endTimeInMillis_ref());
+  toThrift(proto.elapsedTimeInNanos, *thrift.elapsedTimeInNanos_ref());
+  toThrift(proto.queuedTimeInNanos, *thrift.queuedTimeInNanos_ref());
+  toThrift(proto.totalDrivers, *thrift.totalDrivers_ref());
+  toThrift(proto.queuedDrivers, *thrift.queuedDrivers_ref());
+  toThrift(proto.runningDrivers, *thrift.runningDrivers_ref());
+  toThrift(proto.blockedDrivers, *thrift.blockedDrivers_ref());
+  toThrift(proto.completedDrivers, *thrift.completedDrivers_ref());
+  toThrift(proto.cumulativeUserMemory, *thrift.cumulativeUserMemory_ref());
+  toThrift(proto.cumulativeTotalMemory, *thrift.cumulativeTotalMemory_ref());
+  toThrift(
+      proto.userMemoryReservationInBytes,
+      *thrift.userMemoryReservationInBytes_ref());
+  toThrift(
+      proto.revocableMemoryReservationInBytes,
+      *thrift.revocableMemoryReservationInBytes_ref());
+  toThrift(
+      proto.systemMemoryReservationInBytes,
+      *thrift.systemMemoryReservationInBytes_ref());
+  toThrift(proto.peakUserMemoryInBytes, *thrift.peakUserMemoryInBytes_ref());
+  toThrift(proto.peakTotalMemoryInBytes, *thrift.peakTotalMemoryInBytes_ref());
+  toThrift(
+      proto.peakNodeTotalMemoryInBytes,
+      *thrift.peakNodeTotalMemoryInBytes_ref());
+  toThrift(
+      proto.totalScheduledTimeInNanos, *thrift.totalScheduledTimeInNanos_ref());
+  toThrift(proto.totalCpuTimeInNanos, *thrift.totalCpuTimeInNanos_ref());
+  toThrift(
+      proto.totalBlockedTimeInNanos, *thrift.totalBlockedTimeInNanos_ref());
+  toThrift(proto.fullyBlocked, *thrift.fullyBlocked_ref());
+  toThrift(proto.blockedReasons, *thrift.blockedReasons_ref());
+  toThrift(proto.totalAllocationInBytes, *thrift.totalAllocationInBytes_ref());
+  toThrift(
+      proto.rawInputDataSizeInBytes, *thrift.rawInputDataSizeInBytes_ref());
+  toThrift(proto.rawInputPositions, *thrift.rawInputPositions_ref());
+  toThrift(
+      proto.processedInputDataSizeInBytes,
+      *thrift.processedInputDataSizeInBytes_ref());
+  toThrift(
+      proto.processedInputPositions, *thrift.processedInputPositions_ref());
+  toThrift(proto.outputDataSizeInBytes, *thrift.outputDataSizeInBytes_ref());
+  toThrift(proto.outputPositions, *thrift.outputPositions_ref());
+  toThrift(
+      proto.physicalWrittenDataSizeInBytes,
+      *thrift.physicalWrittenDataSizeInBytes_ref());
+  toThrift(proto.pipelines, *thrift.pipelines_ref());
+  toThrift(
+      proto.queuedPartitionedDrivers, *thrift.queuedPartitionedDrivers_ref());
+  toThrift(
+      proto.queuedPartitionedSplitsWeight,
+      *thrift.queuedPartitionedSplitsWeight_ref());
+  toThrift(
+      proto.runningPartitionedDrivers, *thrift.runningPartitionedDrivers_ref());
+  toThrift(
+      proto.runningPartitionedSplitsWeight,
+      *thrift.runningPartitionedSplitsWeight_ref());
+  toThrift(proto.fullGcCount, *thrift.fullGcCount_ref());
+  toThrift(proto.fullGcTimeInMillis, *thrift.fullGcTimeInMillis_ref());
+  toThrift(proto.runtimeStats, *thrift.runtimeStats_ref());
+}
+void toThrift(
+    const protocol::PipelineStats& proto,
+    thrift::PipelineStats& thrift) {
+  toThrift(proto.pipelineId, *thrift.pipelineId_ref());
+  toThrift(proto.firstStartTimeInMillis, *thrift.firstStartTimeInMillis_ref());
+  toThrift(proto.lastStartTimeInMillis, *thrift.lastStartTimeInMillis_ref());
+  toThrift(proto.lastEndTimeInMillis, *thrift.lastEndTimeInMillis_ref());
+  toThrift(proto.inputPipeline, *thrift.inputPipeline_ref());
+  toThrift(proto.outputPipeline, *thrift.outputPipeline_ref());
+  toThrift(proto.totalDrivers, *thrift.totalDrivers_ref());
+  toThrift(proto.queuedDrivers, *thrift.queuedDrivers_ref());
+  toThrift(
+      proto.queuedPartitionedDrivers, *thrift.queuedPartitionedDrivers_ref());
+  toThrift(
+      proto.queuedPartitionedSplitsWeight,
+      *thrift.queuedPartitionedSplitsWeight_ref());
+  toThrift(proto.runningDrivers, *thrift.runningDrivers_ref());
+  toThrift(
+      proto.runningPartitionedDrivers, *thrift.runningPartitionedDrivers_ref());
+  toThrift(
+      proto.runningPartitionedSplitsWeight,
+      *thrift.runningPartitionedSplitsWeight_ref());
+  toThrift(proto.blockedDrivers, *thrift.blockedDrivers_ref());
+  toThrift(proto.completedDrivers, *thrift.completedDrivers_ref());
+  toThrift(
+      proto.userMemoryReservationInBytes,
+      *thrift.userMemoryReservationInBytes_ref());
+  toThrift(
+      proto.revocableMemoryReservationInBytes,
+      *thrift.revocableMemoryReservationInBytes_ref());
+  toThrift(
+      proto.systemMemoryReservationInBytes,
+      *thrift.systemMemoryReservationInBytes_ref());
+  toThrift(proto.queuedTime, *thrift.queuedTime_ref());
+  toThrift(proto.elapsedTime, *thrift.elapsedTime_ref());
+  toThrift(
+      proto.totalScheduledTimeInNanos, *thrift.totalScheduledTimeInNanos_ref());
+  toThrift(proto.totalCpuTimeInNanos, *thrift.totalCpuTimeInNanos_ref());
+  toThrift(
+      proto.totalBlockedTimeInNanos, *thrift.totalBlockedTimeInNanos_ref());
+  toThrift(proto.fullyBlocked, *thrift.fullyBlocked_ref());
+  toThrift(proto.blockedReasons, *thrift.blockedReasons_ref());
+  toThrift(proto.totalAllocationInBytes, *thrift.totalAllocationInBytes_ref());
+  toThrift(
+      proto.rawInputDataSizeInBytes, *thrift.rawInputDataSizeInBytes_ref());
+  toThrift(proto.rawInputPositions, *thrift.rawInputPositions_ref());
+  toThrift(
+      proto.processedInputDataSizeInBytes,
+      *thrift.processedInputDataSizeInBytes_ref());
+  toThrift(
+      proto.processedInputPositions, *thrift.processedInputPositions_ref());
+  toThrift(proto.outputDataSizeInBytes, *thrift.outputDataSizeInBytes_ref());
+  toThrift(proto.outputPositions, *thrift.outputPositions_ref());
+  toThrift(
+      proto.physicalWrittenDataSizeInBytes,
+      *thrift.physicalWrittenDataSizeInBytes_ref());
+  toThrift(proto.operatorSummaries, *thrift.operatorSummaries_ref());
+  toThrift(proto.drivers, *thrift.drivers_ref());
+}
+void toThrift(
+    const protocol::RuntimeMetric& proto,
+    thrift::RuntimeMetric& thrift) {
+  toThrift(proto.name, *thrift.name_ref());
+  toThrift(proto.sum, *thrift.sum_ref());
+  toThrift(proto.count, *thrift.count_ref());
+  toThrift(proto.max, *thrift.max_ref());
+  toThrift(proto.min, *thrift.min_ref());
+  toThrift(proto.unit, *thrift.unit_ref());
+}
+void toThrift(
+    const protocol::JoinOperatorInfo& proto,
+    thrift::JoinOperatorInfo& thrift) {
+  toThrift(proto., *thrift.joinType_ref());
+  toThrift(proto., *thrift.logHistogramProbes_ref());
+  toThrift(proto., *thrift.logHistogramOutput_ref());
+  toThrift(proto., thrift.lookupSourcePositions_ref());
+}
+void toThrift(
+    const protocol::SessionRepresentation& proto,
+    thrift::SessionRepresentation& thrift) {
+  toThrift(proto.queryId, *thrift.queryId_ref());
+  toThrift(proto.transactionId, thrift.transactionId_ref());
+  toThrift(
+      proto.clientTransactionSupport, *thrift.clientTransactionSupport_ref());
+  toThrift(proto.user, *thrift.user_ref());
+  toThrift(proto.principal, thrift.principal_ref());
+  toThrift(proto.source, thrift.source_ref());
+  toThrift(proto.catalog, thrift.catalog_ref());
+  toThrift(proto.schema, thrift.schema_ref());
+  toThrift(proto.traceToken, thrift.traceToken_ref());
+  toThrift(proto.timeZoneKey, *thrift.timeZoneKey_ref());
+  toThrift(proto.locale, *thrift.locale_ref());
+  toThrift(proto.remoteUserAddress, thrift.remoteUserAddress_ref());
+  toThrift(proto.userAgent, thrift.userAgent_ref());
+  toThrift(proto.clientInfo, thrift.clientInfo_ref());
+  toThrift(proto.clientTags, *thrift.clientTags_ref());
+  toThrift(proto.resourceEstimates, *thrift.resourceEstimates_ref());
+  toThrift(proto.startTime, *thrift.startTime_ref());
+  toThrift(proto.systemProperties, *thrift.systemProperties_ref());
+  toThrift(proto.catalogProperties, *thrift.catalogProperties_ref());
+  toThrift(
+      proto.unprocessedCatalogProperties,
+      *thrift.unprocessedCatalogProperties_ref());
+  toThrift(proto.roles, *thrift.roles_ref());
+  toThrift(proto.preparedStatements, *thrift.preparedStatements_ref());
+  toThrift(proto.sessionFunctions, *thrift.sessionFunctions_ref());
+}
+void toThrift(
+    const protocol::SelectedRole& proto,
+    thrift::SelectedRole& thrift) {
+  toThrift(proto.type, *thrift.type_ref());
+  toThrift(proto.role, thrift.role_ref());
+}
+void toThrift(const protocol::Parameter& proto, thrift::Parameter& thrift) {
+  toThrift(proto.name, *thrift.name_ref());
+  toThrift(proto.type, *thrift.type_ref());
+}
+void toThrift(
+    const protocol::RoutineCharacteristics& proto,
+    thrift::RoutineCharacteristics& thrift) {
+  toThrift(proto.language, *thrift.language_ref());
+  toThrift(proto.determinism, *thrift.determinism_ref());
+  toThrift(proto.nullCallClause, *thrift.nullCallClause_ref());
+}
+void toThrift(const protocol::Signature& proto, thrift::Signature& thrift) {
+  toThrift(proto.name, *thrift.name_ref());
+  toThrift(proto.kind, *thrift.kind_ref());
+  toThrift(proto.returnType, *thrift.returnType_ref());
+  toThrift(proto.argumentTypes, *thrift.argumentTypes_ref());
+  toThrift(proto.variableArity, *thrift.variableArity_ref());
+  toThrift(
+      proto.typeVariableConstraints, *thrift.typeVariableConstraints_ref());
+  toThrift(
+      proto.longVariableConstraints, *thrift.longVariableConstraints_ref());
+}
+void toThrift(
+    const protocol::OutputBuffers& proto,
+    thrift::OutputBuffers& thrift) {
+  toThrift(proto.type, *thrift.type_ref());
+  toThrift(proto.version, *thrift.version_ref());
+  toThrift(proto.noMoreBufferIds, *thrift.noMoreBufferIds_ref());
+  toThrift(proto.buffers, *thrift.buffers_ref());
+}
+void toThrift(
+    const protocol::TaskUpdateRequest& proto,
+    thrift::TaskUpdateRequest& thrift) {
+  toThrift(proto.session, *thrift.session_ref());
+  toThrift(proto.extraCredentials, *thrift.extraCredentials_ref());
+  toThrift(proto.fragment, thrift.fragment_ref());
+  toThrift(proto.sources, *thrift.sources_ref());
+  toThrift(proto.outputIds, *thrift.outputIds_ref());
+  toThrift(proto.tableWriteInfo, thrift.tableWriteInfo_ref());
 }
 void toThrift(
     const protocol::ExecutionFailureInfo& proto,
@@ -138,6 +687,122 @@ void toThrift(
   toThrift(proto.errorLocation, *thrift.errorLocation_ref());
   toThrift(proto.errorCode, *thrift.errorCode_ref());
   toThrift(proto.remoteHost, *thrift.remoteHost_ref());
+  toThrift(proto.errorCause, *thrift.errorCause_ref());
+}
+void toThrift(const protocol::TaskId& proto, thrift::TaskId& thrift) {
+  toThrift(proto., *thrift.stageExecutionId_ref());
+  toThrift(proto., *thrift.id_ref());
+  toThrift(proto., *thrift.attemptNumber_ref());
+}
+void toThrift(
+    const protocol::OperatorInfoUnion& proto,
+    thrift::OperatorInfoUnion& thrift) {
+  toThrift(proto., *thrift.exchangeClientStatus_ref());
+  toThrift(proto., *thrift.localExchangeBufferInfo_ref());
+  toThrift(proto., *thrift.tableFinishInfo_ref());
+  toThrift(proto., *thrift.splitOperatorInfo_ref());
+  toThrift(proto., *thrift.hashCollisionsInfo_ref());
+  toThrift(proto., *thrift.partitionedOutputInfo_ref());
+  toThrift(proto., *thrift.joinOperatorInfo_ref());
+  toThrift(proto., *thrift.windowInfo_ref());
+  toThrift(proto., *thrift.tableWriterInfo_ref());
+  toThrift(proto., *thrift.tableWriterMergeInfo_ref());
+}
+void toThrift(
+    const protocol::SqlInvokedFunction& proto,
+    thrift::SqlInvokedFunction& thrift) {
+  toThrift(proto.parameters, *thrift.parameters_ref());
+  toThrift(proto.description, *thrift.description_ref());
+  toThrift(proto.routineCharacteristics, *thrift.routineCharacteristics_ref());
+  toThrift(proto.body, *thrift.body_ref());
+  toThrift(proto.variableArity, *thrift.variableArity_ref());
+  toThrift(proto.signature, *thrift.signature_ref());
+  toThrift(proto.functionId, *thrift.functionId_ref());
+}
+void toThrift(const protocol::TaskInfo& proto, thrift::TaskInfo& thrift) {
+  toThrift(proto.taskId, *thrift.taskId_ref());
+  toThrift(proto.taskStatus, *thrift.taskStatus_ref());
+  toThrift(proto.lastHeartbeatInMillis, *thrift.lastHeartbeatInMillis_ref());
+  toThrift(proto.outputBuffers, *thrift.outputBuffers_ref());
+  toThrift(proto.noMoreSplits, *thrift.noMoreSplits_ref());
+  toThrift(proto.stats, *thrift.stats_ref());
+  toThrift(proto.needsPlan, *thrift.needsPlan_ref());
+  toThrift(proto.metadataUpdates, *thrift.metadataUpdates_ref());
+  toThrift(proto.nodeId, *thrift.nodeId_ref());
+}
+void toThrift(
+    const protocol::OperatorStats& proto,
+    thrift::OperatorStats& thrift) {
+  toThrift(proto.stageId, *thrift.stageId_ref());
+  toThrift(proto.stageExecutionId, *thrift.stageExecutionId_ref());
+  toThrift(proto.pipelineId, *thrift.pipelineId_ref());
+  toThrift(proto.operatorId, *thrift.operatorId_ref());
+  toThrift(proto.planNodeId, *thrift.planNodeId_ref());
+  toThrift(proto.operatorType, *thrift.operatorType_ref());
+  toThrift(proto.totalDrivers, *thrift.totalDrivers_ref());
+  toThrift(proto.addInputCalls, *thrift.addInputCalls_ref());
+  toThrift(proto.addInputWall, *thrift.addInputWall_ref());
+  toThrift(proto.addInputCpu, *thrift.addInputCpu_ref());
+  toThrift(
+      proto.addInputAllocationInBytes, *thrift.addInputAllocationInBytes_ref());
+  toThrift(
+      proto.rawInputDataSizeInBytes, *thrift.rawInputDataSizeInBytes_ref());
+  toThrift(proto.rawInputPositions, *thrift.rawInputPositions_ref());
+  toThrift(proto.inputDataSizeInBytes, *thrift.inputDataSizeInBytes_ref());
+  toThrift(proto.inputPositions, *thrift.inputPositions_ref());
+  toThrift(
+      proto.sumSquaredInputPositions, *thrift.sumSquaredInputPositions_ref());
+  toThrift(proto.getOutputCalls, *thrift.getOutputCalls_ref());
+  toThrift(proto.getOutputWall, *thrift.getOutputWall_ref());
+  toThrift(proto.getOutputCpu, *thrift.getOutputCpu_ref());
+  toThrift(
+      proto.getOutputAllocationInBytes,
+      *thrift.getOutputAllocationInBytes_ref());
+  toThrift(proto.outputDataSizeInBytes, *thrift.outputDataSizeInBytes_ref());
+  toThrift(proto.outputPositions, *thrift.outputPositions_ref());
+  toThrift(
+      proto.physicalWrittenDataSizeInBytes,
+      *thrift.physicalWrittenDataSizeInBytes_ref());
+  toThrift(proto.additionalCpu, *thrift.additionalCpu_ref());
+  toThrift(proto.blockedWall, *thrift.blockedWall_ref());
+  toThrift(proto.finishCalls, *thrift.finishCalls_ref());
+  toThrift(proto.finishWall, *thrift.finishWall_ref());
+  toThrift(proto.finishCpu, *thrift.finishCpu_ref());
+  toThrift(
+      proto.finishAllocationInBytes, *thrift.finishAllocationInBytes_ref());
+  toThrift(
+      proto.userMemoryReservationInBytes,
+      *thrift.userMemoryReservationInBytes_ref());
+  toThrift(
+      proto.revocableMemoryReservationInBytes,
+      *thrift.revocableMemoryReservationInBytes_ref());
+  toThrift(
+      proto.systemMemoryReservationInBytes,
+      *thrift.systemMemoryReservationInBytes_ref());
+  toThrift(
+      proto.peakUserMemoryReservationInBytes,
+      *thrift.peakUserMemoryReservationInBytes_ref());
+  toThrift(
+      proto.peakSystemMemoryReservationInBytes,
+      *thrift.peakSystemMemoryReservationInBytes_ref());
+  toThrift(
+      proto.peakTotalMemoryReservationInBytes,
+      *thrift.peakTotalMemoryReservationInBytes_ref());
+  toThrift(proto.spilledDataSizeInBytes, *thrift.spilledDataSizeInBytes_ref());
+  toThrift(proto.runtimeStats, *thrift.runtimeStats_ref());
+  toThrift(proto.blockedReason, thrift.blockedReason_ref());
+  toThrift(proto.infoUnion, *thrift.infoUnion_ref());
+  toThrift(proto.nullJoinBuildKeyCount, *thrift.nullJoinBuildKeyCount_ref());
+  toThrift(proto.joinBuildKeyCount, *thrift.joinBuildKeyCount_ref());
+  toThrift(proto.nullJoinProbeKeyCount, *thrift.nullJoinProbeKeyCount_ref());
+  toThrift(proto.joinProbeKeyCount, *thrift.joinProbeKeyCount_ref());
+  toThrift(proto.dynamicFilterStats, *thrift.dynamicFilterStats_ref());
+  toThrift(proto.isBlockedCalls, *thrift.isBlockedCalls_ref());
+  toThrift(proto.isBlockedWall, *thrift.isBlockedWall_ref());
+  toThrift(proto.isBlockedCpu, *thrift.isBlockedCpu_ref());
+  toThrift(
+      proto.isBlockedAllocationInBytes,
+      *thrift.isBlockedAllocationInBytes_ref());
 }
 
 } // namespace facebook::presto
