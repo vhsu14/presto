@@ -107,7 +107,7 @@ using Type = std::string;
 
 using DateTime = std::string;
 using Locale = std::string;
-using TimeZoneKey = long;
+using TimeZoneKey = int64_t;
 using URI = std::string;
 using SqlFunctionId = std::string;
 
